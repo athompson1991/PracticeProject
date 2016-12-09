@@ -19,8 +19,14 @@ public class LinkedBinaryTreeNodeTest extends TestCase{
 
     public void testSetData() {
         root.setLeft(new LinkedBinaryTreeNode("leftData"));
-//        root.setRight(new LinkedBinaryTreeNode("rightData"));
+        root.setRight(new LinkedBinaryTreeNode("rightData"));
         assertEquals(root.getLeft().getData(), "leftData");
-//        assertEquals(root.getRight().getData(), "rightData");
+        assertEquals(root.getRight().getData(), "rightData");
+    }
+
+    public void testRemoveFromParent() {
+        root.setLeft(new LinkedBinaryTreeNode("Testing"));
+        root.getLeft().removeFromParent();
+        assertNull(root.getLeft());
     }
 }

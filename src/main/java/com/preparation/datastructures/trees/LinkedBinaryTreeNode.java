@@ -38,9 +38,9 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode<E> {
 
     public void setLeft(BinaryTreeNode<E> child) {
 
-        checkAncestors((LinkedBinaryTreeNode)child);
-
         LinkedBinaryTreeNode<E> childNode = (LinkedBinaryTreeNode<E>)child;
+        checkAncestors(childNode);
+
 
         if (this.left != null) {
             left.parent = null;
@@ -55,24 +55,49 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode<E> {
 
     public void setRight(BinaryTreeNode<E> child) {
 
+        LinkedBinaryTreeNode<E> childNode = (LinkedBinaryTreeNode<E>)child;
+        checkAncestors(childNode);
+
+         if (this.right != null) {
+            right.parent = null;
+        }
+
+        if (childNode != null) {
+            childNode.removeFromParent();
+            childNode.parent = this;
+        }
+        this.right = childNode;
     }
 
     public void removeFromParent() {
-        this.parent = null;
+        if (parent != null) {
+            if (parent.left == this) {
+                parent.left = null;
+            } else if (parent.right == this) {
+                parent.right = null;
+            }
+            this.parent = null;
+        }
     }
 
-    public void traversePreorder() {
 
+    public void traversePreorder(BinaryTreeNode.Visitor visitor) {
+        visitor.visit(this);
+        if(left != null) left.traversePreorder(visitor);
+        if(right != null) right.traversePreorder(visitor);
     }
 
-    public void traversePostorder() {
-
+    public void traversePostorder(BinaryTreeNode.Visitor visitor) {
+        if(left != null) left.traversePreorder(visitor);
+        if(right != null) right.traversePreorder(visitor);
+        visitor.visit(this);
     }
 
-    public void traverseInorder() {
-
+    public void traverseInorder(BinaryTreeNode.Visitor visitor) {
+        if(left != null) left.traversePreorder(visitor);
+        visitor.visit(this);
+        if(right != null) right.traversePreorder(visitor);
     }
-
 
     public void checkAncestors(LinkedBinaryTreeNode<E> child) {
         for (LinkedBinaryTreeNode<E> n = this; n != null; n = n.parent) {

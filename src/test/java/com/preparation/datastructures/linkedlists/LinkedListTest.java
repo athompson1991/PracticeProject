@@ -40,4 +40,11 @@ public class LinkedListTest {
         assertEquals(myList.get(1), "Hello");
     }
 
+    @Test
+    public void testReverse() {
+        myList.reverse();
+        assertEquals("Alex", myList.get(0));
+        assertEquals("Lucas", myList.get(1));
+    }
+
 }

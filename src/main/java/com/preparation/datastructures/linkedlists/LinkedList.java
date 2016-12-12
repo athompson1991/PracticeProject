@@ -129,6 +129,19 @@ public class LinkedList {
         System.out.println(outString);
     }
 
+    public void reverse() {
+        LinkedListNode currentNode = head;
+        LinkedListNode previousNode = null;
+        LinkedListNode nextNode = null;
+
+        while(currentNode != null) {
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        head = previousNode;
+    }
 }
 
 

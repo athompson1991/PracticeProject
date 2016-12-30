@@ -26,16 +26,37 @@ public class Car {
 
     public void assignTicket(SetOfSpots ticketHandler) {
         String tempTicket = null;
+        String determinedTicket = null;
         int i = 2;
-        while (tempTicket == null & i > 0) {
+        while (tempTicket == null & i >= 0) {
             String tempLot = lotSizes[i];
             if (tempLot == this.size) {
-                tempTicket = ticketHandler.distributeTicket(this.size);
+                determinedTicket = determineRightTicket(ticketHandler);
+                tempTicket = ticketHandler.distributeTicket(determinedTicket);
             }
             i--;
         }
         assignedTicket = tempTicket;
     }
 
+    public void relinquishTicket(SetOfSpots spots) {
+        spots.returnTicket(this.assignedTicket);
+        this.assignedTicket = null;
+    }
+
+    private String determineRightTicket(SetOfSpots spots) {
+        String rightTicket = null;
+        if (this.size == "large") {
+            rightTicket = "large";
+        } else if (this.size == "medium") {
+            rightTicket = "medium";
+            if (spots.outOfTicketType("medium")) rightTicket = "large";
+        } else if (this.size == "small") {
+            rightTicket = "small";
+            if (spots.outOfTicketType("small")) rightTicket = "medium";
+            if (spots.outOfTicketType("small") & spots.outOfTicketType("medium")) rightTicket = "large";
+        }
+        return rightTicket;
+    }
 
 }

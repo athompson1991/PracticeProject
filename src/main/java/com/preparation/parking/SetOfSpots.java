@@ -38,8 +38,6 @@ public class SetOfSpots {
         return Character.toUpperCase(lotSize.charAt(0));
     }
 
-    ;
-
 
     private void generateTickets(String lotSize) {
         char firstCharCap = firstCharUpperCase(lotSize);

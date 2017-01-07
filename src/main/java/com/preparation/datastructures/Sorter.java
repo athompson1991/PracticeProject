@@ -52,6 +52,14 @@ public class Sorter {
     }
 
     public void selectionSort() {
+        for(int i = 0; i < arraySize; i++) {
+            int tempMin = i;
+            for(int j = i+1; j < arraySize; j++) {
+                if(array[j] < array[tempMin])
+                    tempMin = j;
+            }
+            swap(i, tempMin);
+        }
     }
 
     public void insertionSort() {

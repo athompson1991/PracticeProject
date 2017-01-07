@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class Sorter {
 
-    private int arraySize = 10000;
+    private int arraySize = 1000;
     private int maxSize = 1000;
     private boolean isSorted;
     private Random randomizer = new Random();
@@ -71,6 +71,16 @@ public class Sorter {
     }
 
     public void bubbleSort() {
+        for(int i = 0; i < arraySize; i++) {
+            boolean swapped = false;
+            for(int j = arraySize - 1; j > i; j--) {
+                if(array[j] < array[j-1]) {
+                    swap(j, j-1);
+                    swapped = true;
+                }
+            }
+            if(!swapped) break;
+        }
     }
 
     public void mergeSort() {

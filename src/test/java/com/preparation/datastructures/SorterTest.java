@@ -35,13 +35,13 @@ public class SorterTest extends TestCase {
         assertEquals(mySorter.getData()[0], second);
     }
 
-    public void testInsertionSort() {
-        mySorter.insertionSort();
+    public void testSelectionSort() {
+        mySorter.selectionSort();
         assertTrue(mySorter.isSorted());
     }
 
-    public void testSelectionSort() {
-        mySorter.selectionSort();
+    public void testInsertionSort() {
+        mySorter.insertionSort();
         assertTrue(mySorter.isSorted());
     }
 

@@ -92,4 +92,12 @@ public class TestSetOfSpots {
         assertTrue(mySpots.outOfTicketType("small"));
     }
 
+    @Test
+    public void testCheckSpot() {
+        String spotToCheck = "L6";
+        assertEquals(true, mySpots.isEmptySpot(spotToCheck));
+        mySpots.distributeTicket("large");
+        assertEquals(false, mySpots.isEmptySpot(spotToCheck));
+    }
+
 }

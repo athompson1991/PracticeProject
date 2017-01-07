@@ -33,44 +33,6 @@ public class Sorter {
         array[j] = temp;
     }
 
-    public void insertionSort() {
-       for (int i = 0; i < arraySize; i++) {
-           for(int j = i; j > 0 && array[j] < array[j-1]; j--) {
-                swap(j, j-1);
-           }
-       }
-
-
-    }
-//        for(int i = 0; i < arraySize; i++) {
-//            for(int j = i; j > 0 && array[i] < array[j-1]; j--) {
-//                array[j] = array[j-1];
-//            }
-//        }
-//    }
-
-//    public void shellSort() {
-//        int k = arraySize / 2;
-//        while(k >= 1) {
-//            for(int i = 0; i < arraySize; i+=k) {
-//
-//            }
-//        }
-//    }
-
-    public void mergeSort() {
-        mergeSort(array, 0, arraySize - 1);
-    }
-
-    public void mergeSort(int arr[], int lo, int hi) {
-        int midpoint = (lo + hi) / 2;
-        if(lo >= hi) return;
-
-        mergeSort(arr, lo, midpoint);
-        mergeSort(arr, midpoint + 1, hi);
-
-    }
-
     public int[] getData() {
         return array;
     }
@@ -81,12 +43,6 @@ public class Sorter {
         return empty;
     }
 
-    public void printHead() {
-        for(int i = 0; i < 10; i++) {
-            System.out.println(array[i]);
-        }
-    }
-
     public boolean isSorted() {
         isSorted = true;
         for(int i = 1; i < arraySize; i++) {
@@ -95,4 +51,27 @@ public class Sorter {
         return isSorted;
     }
 
+    public void selectionSort() {
+    }
+
+    public void insertionSort() {
+        for (int i = 0; i < arraySize; i++) {
+            for(int j = i; j > 0 && array[j] < array[j-1]; j--) {
+                swap(j, j-1);
+            }
+        }
+    }
+
+    public void bubbleSort() {
+    }
+
+    public void mergeSort() {
+
+    }
+
+    public void heapSort() {
+    }
+
+    public void quickSort() {
+    }
 }

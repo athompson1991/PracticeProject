@@ -14,17 +14,19 @@ public class SorterTest extends TestCase {
 
     public void setUp() {
         mySorter = new Sorter();
+        mySorter.populateRandomArray();
     }
 
     public void testPopulateArray() {
-        assertTrue(mySorter.isEmpty());
-        mySorter.populateRandomArray();
-        assertNotSame(0, mySorter.getData()[0]);
-        assertNotSame(0, mySorter.getData()[10]);
-        assertNotSame(0, mySorter.getData()[mySorter.getData().length - 1]);
-        assertFalse(mySorter.isSorted());
-        mySorter.populateSortedArray();
-        assertTrue(mySorter.isSorted());
+        Sorter testSorter = new Sorter();
+        assertTrue(testSorter.isEmpty());
+        testSorter.populateRandomArray();
+        assertNotSame(0, testSorter.getData()[0]);
+        assertNotSame(0, testSorter.getData()[10]);
+        assertNotSame(0, testSorter.getData()[testSorter.getData().length - 1]);
+        assertFalse(testSorter.isSorted());
+        testSorter.populateSortedArray();
+        assertTrue(testSorter.isSorted());
     }
 
     public void testSwap() {
@@ -34,22 +36,34 @@ public class SorterTest extends TestCase {
     }
 
     public void testInsertionSort() {
-        mySorter.populateRandomArray();
         mySorter.insertionSort();
         assertTrue(mySorter.isSorted());
     }
 
+    public void testSelectionSort() {
+        mySorter.selectionSort();
+        assertTrue(mySorter.isSorted());
+    }
+
+    public void testBubble() {
+        mySorter.bubbleSort();
+        assertTrue(mySorter.isSorted());
+    }
+
     public void testMergeSort() {
-        mySorter.populateRandomArray();
         mySorter.mergeSort();
         assertTrue(mySorter.isSorted());
     }
-//
-//    public void testShellSort() {
-//        mySorter.populateRandomArray();
-//        mySorter.shellSort();
-//        assertTrue(mySorter.isSorted());
-//    }
+
+    public void testHeapSort() {
+        mySorter.heapSort();
+        assertTrue(mySorter.isSorted());
+    }
+
+    public void testQuickSort() {
+        mySorter.quickSort();
+        assertTrue(mySorter.isSorted());
+    }
 
     public void tearDown() {
         mySorter = null;

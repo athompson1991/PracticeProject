@@ -1,5 +1,7 @@
 package com.preparation.parking;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -10,19 +12,21 @@ public class SetOfSpots {
 
     private HashMap<String, Integer> availableSpotCounts;
     private HashMap<String, Stack> availableSpots;
+    private HashMap<String, Boolean> spotLookupTable;
     private final String sizeBuckets[] = {"small", "medium", "large"};
 
-    SetOfSpots(int nSmall, int nMedium, int nLarge) {
+    public SetOfSpots(int nSmall, int nMedium, int nLarge) {
         availableSpots = new HashMap();
         availableSpotCounts = new HashMap();
+        spotLookupTable = new HashMap<String, Boolean>();
 
         int nValues[] = {nSmall, nMedium, nLarge};
 
         for (int i = 0; i < 3; i++) {
-            String tempBucket = sizeBuckets[i];
+            String lotSize = sizeBuckets[i];
             int tempVal = nValues[i];
-            availableSpotCounts.put(tempBucket, tempVal);
-            this.generateTickets(tempBucket);
+            availableSpotCounts.put(lotSize, tempVal);
+            this.generateTickets(lotSize);
         }
     }
 
@@ -42,41 +46,47 @@ public class SetOfSpots {
     private void generateTickets(String lotSize) {
         char firstCharCap = firstCharUpperCase(lotSize);
         Stack ticketStack = new Stack();
+        String ticketCode;
         for (int i = 0; i < (Integer) getAvailableSpotCounts().get(lotSize); i++) {
-            ticketStack.push(firstCharCap + Integer.toString(i + 1));
+            ticketCode = firstCharCap + Integer.toString(i + 1);
+            spotLookupTable.put(ticketCode, true);
+            ticketStack.push(ticketCode);
         }
         availableSpots.put(lotSize, ticketStack);
     }
 
     public String distributeTicket(String lotSize) {
-        String ticket;
-        if (availableSpots.get(lotSize).empty()) {
-            ticket = null;
+        Stack sizeStack = availableSpots.get(lotSize);
+        String ticketCode;
+        if (sizeStack.empty()) {
+            ticketCode = null;
         } else {
-            ticket = (String) availableSpots.get(lotSize).pop();
+            ticketCode = (String) sizeStack.pop();
             int oldCount = availableSpotCounts.get(lotSize);
             availableSpotCounts.put(lotSize, oldCount - 1);
+            spotLookupTable.put(ticketCode, false);
         }
-        return ticket;
-
+        return ticketCode;
     }
 
-    public void returnTicket(String ticket) {
-        char sizeCode = ticket.charAt(0);
+    public void returnTicket(String ticketCode) {
+        char sizeCode = ticketCode.charAt(0);
         for (int i = 0; i < 3; i++) {
-            String tempBucket = sizeBuckets[i];
-            Stack tempStack = availableSpots.get(tempBucket);
-            if (sizeCode == firstCharUpperCase(tempBucket)) {
-                tempStack.push(ticket);
+            String lotSize = sizeBuckets[i];
+            Stack ticketStack = availableSpots.get(lotSize);
+            if (sizeCode == firstCharUpperCase(lotSize)) {
+                ticketStack.push(ticketCode);
+                spotLookupTable.put(ticketCode, true);
             }
         }
-
     }
 
     public boolean outOfTicketType(String lotSize) {
-        Stack testStack;
-        testStack = availableSpots.get(lotSize);
+        Stack testStack = availableSpots.get(lotSize);
         return testStack.empty();
     }
 
+    public Boolean isEmptySpot(String spotCode) {
+        return spotLookupTable.get(spotCode);
+    }
 }

@@ -83,12 +83,51 @@ public class Sorter {
         }
     }
 
-    public void mergeSort() {
+    // Merge Sort methods
 
+    public void mergeSort() {
+        int[] workArray = new int[arraySize];
+        workArray = copyArray(array, 0,arraySize, workArray);
+        split(workArray,0, arraySize - 1, array);
     }
+
+    private void split(int[] inArr, int begin, int end, int[] sortArray) {
+        if(end - begin < 2)
+            return;
+        int middle = (end + begin) / 2;
+        split(sortArray, begin, middle, inArr);
+        split(sortArray, middle, end, inArr);
+        merge(inArr, begin, middle, end, sortArray);
+    }
+
+    private void merge(int[] inArr, int begin, int middle, int end, int[] outArr) {
+        int i = begin;
+        int j = middle;
+
+        for(int k = begin; k <end; k++) {
+            if(i < middle && (j >= end || inArr[i] <= inArr[j])) {
+                outArr[k] = inArr[j];
+                i++;
+            } else {
+                outArr[k] = inArr[j];
+                j++;
+            }
+        }
+    }
+
+    private int[] copyArray(int[] oldArray, int begin, int end, int[] newArray) {
+        for(int i = begin; i < end; i++) {
+            newArray[i] = oldArray[i];
+        }
+        return newArray;
+    }
+
+    // Heap Sort methods
 
     public void heapSort() {
     }
+
+    // Quick Sort methods
 
     public void quickSort() {
     }

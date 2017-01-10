@@ -30,16 +30,16 @@ public class ChildListTreeNode<E> implements SimpleTreeNode<E> {
 
     public void insertChildAt(int index, SimpleTreeNode<E> child) {
 
-        for(ChildListTreeNode node = this; node != null; node = node.parent) {
+        for (ChildListTreeNode node = this; node != null; node = node.parent) {
             if (node == child) {
                 throw new IllegalArgumentException();
             }
         }
 
-        ChildListTreeNode<E> childNode = (ChildListTreeNode<E>)child;
+        ChildListTreeNode<E> childNode = (ChildListTreeNode<E>) child;
         children.add(index, childNode);
 
-        if(childNode != null) {
+        if (childNode != null) {
             childNode.removeFromParent();
             childNode.parent = this;
         }

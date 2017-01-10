@@ -5,9 +5,14 @@ package com.preparation.datastructures.queues;
  */
 public interface Queue {
     boolean isEmpty();
+
     int size();
+
     void enqueue(Object item);
+
     Object dequeue();
+
     Object peekAtHead();
+
     Object peekAtTail();
 }

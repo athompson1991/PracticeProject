@@ -14,5 +14,8 @@ public class LinkedQueueTest extends QueueTest {
     }
 
     @Test
-    public void genericTest(){};
+    public void genericTest() {
+    }
+
+    ;
 }

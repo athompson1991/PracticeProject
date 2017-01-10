@@ -72,13 +72,13 @@ public abstract class QueueTest {
     }
 
     public void manyEnqueues(int enqueueCount) {
-        for(int i = 0; i < enqueueCount; i++) {
+        for (int i = 0; i < enqueueCount; i++) {
             myQueue.enqueue("Hello");
         }
     }
 
     public void manyDequeues(int enqueueCount) {
-        for(int i = 0; i < enqueueCount; i++) {
+        for (int i = 0; i < enqueueCount; i++) {
             myQueue.dequeue();
         }
     }

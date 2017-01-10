@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 /**
  * Created by aleth on 12/6/2016.
  */
-public class LinkedBinaryTreeNodeTest extends TestCase{
+public class LinkedBinaryTreeNodeTest extends TestCase {
 
     private BinaryTreeNode root;
 

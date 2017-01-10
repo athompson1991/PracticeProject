@@ -16,7 +16,7 @@ public class BoundedStackTest extends StackInterfaceTest {
 
     @Test(expected = IllegalStateException.class)
     public void testPushToFullStack() {
-        for(int i = 0; i < CAPACITY; i++) {
+        for (int i = 0; i < CAPACITY; i++) {
             myStack.push("potato");
         }
         myStack.push("over potato");

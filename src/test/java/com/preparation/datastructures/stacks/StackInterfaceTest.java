@@ -18,7 +18,7 @@ public abstract class StackInterfaceTest {
     protected StackInterface myStack;
 
     @Test
-    public void testEmpty(){
+    public void testEmpty() {
         assertTrue(myStack.isEmpty());
         assertEquals(myStack.size(), 0);
     }
@@ -35,7 +35,7 @@ public abstract class StackInterfaceTest {
 
     @Test
     public void testPushPop() {
-        Object message = "Hello";
+        Object message = String.valueOf("Hello");
         myStack.push(message);
         assertEquals(message, myStack.pop());
     }
@@ -50,10 +50,10 @@ public abstract class StackInterfaceTest {
     @Test
     public void testPopToEmpty() {
         int numberOfPushes = 10;
-        for (int i =0; i < numberOfPushes; i++){
+        for (int i = 0; i < numberOfPushes; i++) {
             myStack.push("Potato");
         }
-        for(int i = 0; i < numberOfPushes; i++) {
+        for (int i = 0; i < numberOfPushes; i++) {
             myStack.pop();
         }
         assertTrue(myStack.isEmpty());
@@ -66,8 +66,8 @@ public abstract class StackInterfaceTest {
         myStack.pop();
     }
 
-    @Test(expected=NoSuchElementException.class)
-    public void testTopEmptyStack(){
+    @Test(expected = NoSuchElementException.class)
+    public void testTopEmptyStack() {
         assertTrue(myStack.isEmpty());
         myStack.top();
     }

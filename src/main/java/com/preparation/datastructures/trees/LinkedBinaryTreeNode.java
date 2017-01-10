@@ -11,12 +11,11 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode<E> {
     protected LinkedBinaryTreeNode<E> right;
 
 
-
     public LinkedBinaryTreeNode(E data) {
         this.data = data;
     }
 
-    public E getData(){
+    public E getData() {
         return data;
     }
 
@@ -38,7 +37,7 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode<E> {
 
     public void setLeft(BinaryTreeNode<E> child) {
 
-        LinkedBinaryTreeNode<E> childNode = (LinkedBinaryTreeNode<E>)child;
+        LinkedBinaryTreeNode<E> childNode = (LinkedBinaryTreeNode<E>) child;
         checkAncestors(childNode);
 
 
@@ -55,10 +54,10 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode<E> {
 
     public void setRight(BinaryTreeNode<E> child) {
 
-        LinkedBinaryTreeNode<E> childNode = (LinkedBinaryTreeNode<E>)child;
+        LinkedBinaryTreeNode<E> childNode = (LinkedBinaryTreeNode<E>) child;
         checkAncestors(childNode);
 
-         if (this.right != null) {
+        if (this.right != null) {
             right.parent = null;
         }
 
@@ -83,20 +82,20 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode<E> {
 
     public void traversePreorder(BinaryTreeNode.Visitor visitor) {
         visitor.visit(this);
-        if(left != null) left.traversePreorder(visitor);
-        if(right != null) right.traversePreorder(visitor);
+        if (left != null) left.traversePreorder(visitor);
+        if (right != null) right.traversePreorder(visitor);
     }
 
     public void traversePostorder(BinaryTreeNode.Visitor visitor) {
-        if(left != null) left.traversePreorder(visitor);
-        if(right != null) right.traversePreorder(visitor);
+        if (left != null) left.traversePreorder(visitor);
+        if (right != null) right.traversePreorder(visitor);
         visitor.visit(this);
     }
 
     public void traverseInorder(BinaryTreeNode.Visitor visitor) {
-        if(left != null) left.traversePreorder(visitor);
+        if (left != null) left.traversePreorder(visitor);
         visitor.visit(this);
-        if(right != null) right.traversePreorder(visitor);
+        if (right != null) right.traversePreorder(visitor);
     }
 
     public void checkAncestors(LinkedBinaryTreeNode<E> child) {

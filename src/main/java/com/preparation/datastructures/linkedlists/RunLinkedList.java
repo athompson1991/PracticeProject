@@ -9,7 +9,7 @@ public class RunLinkedList {
     public static void printHeader(String message) {
         String repeated;
 
-        repeated = String.format(String.format("%%%ds", message.length() + 4) , " ").replace(" ","-");
+        repeated = String.format(String.format("%%%ds", message.length() + 4), " ").replace(" ", "-");
         System.out.println("\n");
 
         System.out.println(repeated);

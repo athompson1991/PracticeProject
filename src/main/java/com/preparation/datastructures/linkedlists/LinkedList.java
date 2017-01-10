@@ -10,7 +10,7 @@ public class LinkedList {
     private LinkedListNode<String> head;
     public int size = 0;
 
-    public LinkedList(){
+    public LinkedList() {
         head = null;
     }
 
@@ -24,19 +24,19 @@ public class LinkedList {
     }
 
     public String getFirst() {
-        if(head.data == null) throw new NoSuchElementException();
+        if (head.data == null) throw new NoSuchElementException();
         return head.data;
     }
 
     public void removeFirst() {
-        if(head.data == null) throw new NoSuchElementException();
+        if (head.data == null) throw new NoSuchElementException();
         head = head.next;
         size--;
     }
 
     public void addLast(String data) {
         LinkedListNode<String> tempNode = head;
-        while(tempNode.next != null) {
+        while (tempNode.next != null) {
             tempNode = tempNode.next;
         }
         tempNode.next = new LinkedListNode<String>(data, null);
@@ -53,7 +53,7 @@ public class LinkedList {
 
     public String get(int position) {
         LinkedListNode<String> tempNode = head;
-        for(int i = 0; i < position; i++){
+        for (int i = 0; i < position; i++) {
             tempNode = tempNode.next;
         }
         return tempNode.data;
@@ -61,7 +61,7 @@ public class LinkedList {
 
     public void insertAfter(String data, int position) {
         LinkedListNode<String> tempNode = head;
-        for(int i = 0; i < position; i++) {
+        for (int i = 0; i < position; i++) {
             tempNode = tempNode.next;
         }
         tempNode.next = new LinkedListNode<String>(data, tempNode.next);
@@ -73,7 +73,7 @@ public class LinkedList {
         LinkedListNode<String> currentNode = head;
         int i = 0;
 
-        if(position == 0){
+        if (position == 0) {
             addFirst(data);
         } else {
             while (currentNode != null & i < position) {
@@ -91,15 +91,14 @@ public class LinkedList {
 
     public void delete(int position) {
         LinkedListNode<String> previousNode = null;
-        LinkedListNode<String> currentNode  = head;
+        LinkedListNode<String> currentNode = head;
         int i = 0;
 
-        if(position == 0) {
+        if (position == 0) {
             removeFirst();
-        } else if(position >= size) {
+        } else if (position >= size) {
             throw new IndexOutOfBoundsException("Can't delete, not enough data in list");
-        }
-        else {
+        } else {
             while (currentNode != null & i < position) {
                 previousNode = currentNode;
                 currentNode = currentNode.next;
@@ -112,7 +111,7 @@ public class LinkedList {
 
     public void printList() {
         int i = 0;
-        while(i < size) {
+        while (i < size) {
             System.out.println("index " + i + ":   " + get(i));
             i++;
         }
@@ -121,11 +120,11 @@ public class LinkedList {
     public void printListOneliner() {
         String outString = "[";
         int i = 0;
-        while(i < size - 1) {
+        while (i < size - 1) {
             outString = outString + " " + get(i) + ",";
             i++;
         }
-        outString =  outString + " " + getLast() + " ]";
+        outString = outString + " " + getLast() + " ]";
         System.out.println(outString);
     }
 
@@ -134,7 +133,7 @@ public class LinkedList {
         LinkedListNode previousNode = null;
         LinkedListNode nextNode = null;
 
-        while(currentNode != null) {
+        while (currentNode != null) {
             nextNode = currentNode.next;
             currentNode.next = previousNode;
             previousNode = currentNode;

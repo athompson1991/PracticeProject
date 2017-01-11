@@ -78,7 +78,10 @@ public class LinkedList {
     }
 
     public Object pop() {
-        return null;
+        Object out = head.getData();
+        head = head.next;
+        size--;
+        return out;
     }
 
 }

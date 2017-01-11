@@ -48,6 +48,12 @@ public class LinkedListTest {
     public void testPop() {
         pushMany();
         assertEquals(123, myList.pop());
+        assertEquals(3, myList.getSize());
+        myList.pop();
+        myList.pop();
+//        myList.pop();
+        assertTrue(myList.isEmpty());
+        assertNull(myList.pop());
     }
 
     private void pushMany() {

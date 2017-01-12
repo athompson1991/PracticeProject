@@ -5,8 +5,12 @@ package com.preparation.datastructures.stacks;
  */
 public interface StackInterface {
     void push(Object item);
+
     Object pop();
+
     Object top();
+
     int size();
+
     boolean isEmpty();
 }

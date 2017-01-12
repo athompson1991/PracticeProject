@@ -7,13 +7,21 @@ import java.util.List;
  */
 public interface SimpleTreeNode<E> {
     E getData();
+
     void setData(E data);
+
     SimpleTreeNode<E> getParent();
+
     List<? extends SimpleTreeNode<E>> getChildren();
+
     void insertChildAt(int index, SimpleTreeNode<E> child);
+
     void removeFromParent();
+
     void traversePreorder(Visitor<E> visitor);
+
     void traversePostorder(Visitor<E> visitor);
+
     void traverseBreadthFirst(Visitor<E> visitor);
 
     public interface Visitor<E> {

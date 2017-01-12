@@ -26,12 +26,6 @@ public class Sorter {
         }
     }
 
-    public void populateReversedArray() {
-        for(int i = arraySize; i > 0; i--) {
-            array[arraySize - i] = i;
-        }
-    }
-
     public void swap(int i, int j){
         if(i < 0 || j >= arraySize) throw new NoSuchElementException();
         int temp = array[i];

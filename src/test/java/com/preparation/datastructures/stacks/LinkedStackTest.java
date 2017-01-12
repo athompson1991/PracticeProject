@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Created by aleth on 12/4/2016.
  */
-public class LinkedStackTest extends StackInterfaceTest{
+public class LinkedStackTest extends StackInterfaceTest {
 
     @Before
     public void makeLinkedStack() {
@@ -14,5 +14,8 @@ public class LinkedStackTest extends StackInterfaceTest{
     }
 
     @Test
-    public void randoTest(){};
+    public void randoTest() {
+    }
+
+    ;
 }

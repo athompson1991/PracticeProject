@@ -3,12 +3,13 @@ package com.preparation.datastructures.queues;
 /**
  * Created by aleth on 12/4/2016.
  */
-public class LinkedQueue implements Queue{
+public class LinkedQueue implements Queue {
 
     private class Node {
         public Object data;
         public Node next;
-        public  Node(Object data, Node next) {
+
+        public Node(Object data, Node next) {
             this.data = data;
             this.next = next;
         }
@@ -26,9 +27,9 @@ public class LinkedQueue implements Queue{
         return size;
     }
 
-    public void enqueue(Object item){
+    public void enqueue(Object item) {
         Node newNode = new Node(item, null);
-        if(size == 0){
+        if (size == 0) {
             head = newNode;
         } else {
             tail.next = newNode;
@@ -37,18 +38,18 @@ public class LinkedQueue implements Queue{
         size++;
     }
 
-    public Object dequeue(){
-        if(size == 0) throw new IllegalStateException("Empty list");
+    public Object dequeue() {
+        if (size == 0) throw new IllegalStateException("Empty list");
         Object out = head.data;
         size--;
         return out;
     }
 
-    public Object peekAtHead(){
+    public Object peekAtHead() {
         return head.data;
     }
 
-    public Object peekAtTail(){
+    public Object peekAtTail() {
         return tail.data;
     }
 }

@@ -32,28 +32,28 @@ public class BinarySearchTree<E> {
 
     public int compare(E x, E y) {
         if (comparator == null) {
-            return((Comparable<E>)x).compareTo(y);
+            return ((Comparable<E>) x).compareTo(y);
         } else {
             return comparator.compare(x, y);
         }
     }
 
     public void insert(E data) {
-        if(isEmpty()) root = new LinkedBinaryTreeNode<E>(data);
+        if (isEmpty()) root = new LinkedBinaryTreeNode<E>(data);
         BinaryTreeNode<E> n = root;
-        while(true) {
+        while (true) {
             int comparisonResult = compare(data, n.getData());
             if (comparisonResult == 0) {
                 n.setData(data);
                 return;
             } else if (comparisonResult < 0) {
-                if(n.getLeft() == null) {
+                if (n.getLeft() == null) {
                     n.setLeft(new LinkedBinaryTreeNode<E>(data));
                     return;
                 }
                 n = n.getLeft();
             } else {
-                if(n.getRight() == null) {
+                if (n.getRight() == null) {
                     n.setRight(new LinkedBinaryTreeNode<E>(data));
                     return;
                 }
@@ -61,4 +61,5 @@ public class BinarySearchTree<E> {
             }
         }
     }
+
 }

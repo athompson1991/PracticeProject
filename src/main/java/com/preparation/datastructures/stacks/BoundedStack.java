@@ -9,11 +9,11 @@ public class BoundedStack implements StackInterface {
     private Object[] array;
     private int size = 0;
 
-    public BoundedStack(int capacity){
+    public BoundedStack(int capacity) {
         array = new Object[capacity];
     }
 
-    public void push(Object item){
+    public void push(Object item) {
         if (size == array.length) {
             throw new IllegalStateException("Stack is full!");
         }
@@ -25,14 +25,14 @@ public class BoundedStack implements StackInterface {
     }
 
     public Object pop() {
-        if(size == 0) throw new NoSuchElementException("Empty Stack!");
+        if (size == 0) throw new NoSuchElementException("Empty Stack!");
         Object result = array[size - 1];
         popDelete();
         return result;
     }
 
     public Object top() {
-        if(size == 0) throw new NoSuchElementException("Empty Stack!");
+        if (size == 0) throw new NoSuchElementException("Empty Stack!");
         return array[size - 1];
     }
 
@@ -43,4 +43,5 @@ public class BoundedStack implements StackInterface {
     public int size() {
         return size;
     }
+
 }

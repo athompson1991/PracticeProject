@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 /**
  * Created by aleth on 12/8/16.
  */
-public class BinarySearchTreeTest extends TestCase{
+public class BinarySearchTreeTest extends TestCase {
 
     public BinarySearchTree myTree;
     public BinaryTreeNode newRoot;

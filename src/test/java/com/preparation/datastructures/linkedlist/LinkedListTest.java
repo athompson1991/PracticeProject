@@ -48,12 +48,29 @@ public class LinkedListTest {
     public void testPop() {
         pushMany();
         assertEquals(123, myList.pop());
-        assertEquals(3, myList.getSize());
-        myList.pop();
-        myList.pop();
-//        myList.pop();
-        assertTrue(myList.isEmpty());
+        assertEquals("Potato", myList.pop());
+        assertEquals("Thompson", myList.pop());
+        assertEquals("Alex", myList.pop());
         assertNull(myList.pop());
+        assertTrue(myList.isEmpty());
+        myList.push("Final test");
+        assertEquals("Final test", myList.pop());
+    }
+
+    @Test
+    public void testReverse() {
+        pushMany();
+        myList.reverse();
+        assertEquals("Alex", myList.pop());
+        assertEquals("Thompson", myList.pop());
+        assertEquals("Potato", myList.pop());
+        assertEquals(123, myList.pop());
+    }
+
+    @Test
+    public void testPrint() {
+        pushMany();
+        assertEquals("[ 123, Potato, Thompson, Alex ]", myList.print());
     }
 
     private void pushMany() {

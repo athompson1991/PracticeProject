@@ -8,8 +8,8 @@ public class LinkedList {
     private LinkedListNode head = null;
     private int size;
 
-    private class LinkedListNode {
 
+    private class LinkedListNode {
         private LinkedListNode next;
         private LinkedListNode previous;
         private Object data = null;
@@ -23,12 +23,25 @@ public class LinkedList {
         public Object getData() {
             return this.data;
         }
+    }
 
+    public String print() {
+        String out = "";
+        LinkedListNode temp = head;
+        String firstEntry = String.valueOf(head.getData());
+        out = "[ " + firstEntry;
+        while (temp.next != null) {
+            temp = temp.next;
+            out = out + ", " + String.valueOf(temp.getData());
+        }
+        out = out + " ]";
+        return out;
     }
 
     public int getSize() {
         return size;
     }
+
 
     public Object peek() {
         return head.getData();
@@ -45,6 +58,18 @@ public class LinkedList {
             head = new LinkedListNode(null, head, data);
         }
         size++;
+    }
+
+    public Object pop() {
+        Object out;
+        if (head == null) {
+            out = null;
+        } else {
+            out = head.getData();
+            head = head.next;
+            size--;
+        }
+        return out;
     }
 
     public boolean isEmpty() {
@@ -69,19 +94,29 @@ public class LinkedList {
         size++;
     }
 
+    public void reverse() {
+        LinkedListNode currentNode = head;
+        LinkedListNode nextNode = null;
+        LinkedListNode workNode = null;
+
+        while (currentNode.next != null) {
+            nextNode = currentNode.next;
+            currentNode.previous = nextNode;
+            currentNode.next = workNode;
+            workNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        head = currentNode;
+        head.next = workNode;
+    }
+
     private LinkedListNode loopToThisNode(int i) {
         LinkedListNode temp = head;
         for (int j = 0; j < i; j++) {
             temp = temp.next;
         }
         return temp;
-    }
-
-    public Object pop() {
-        Object out = head.getData();
-        head = head.next;
-        size--;
-        return out;
     }
 
 }

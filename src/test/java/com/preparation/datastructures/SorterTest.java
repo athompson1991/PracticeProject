@@ -27,6 +27,9 @@ public class SorterTest extends TestCase {
         assertFalse(testSorter.isSorted());
         testSorter.populateSortedArray();
         assertTrue(testSorter.isSorted());
+        testSorter.populateReversedArray();
+        assertFalse(testSorter.isSorted());
+        System.out.println(testSorter.getData()[1]);
     }
 
     public void testSwap() {

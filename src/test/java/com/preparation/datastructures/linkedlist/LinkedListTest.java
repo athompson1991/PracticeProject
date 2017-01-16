@@ -45,6 +45,21 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testDeleteAt() {
+        pushMany();
+        System.out.println(myList.print());
+        assertEquals("Potato", myList.getDataAt(1));
+        myList.deleteDataAt(1);
+        assertEquals("Thompson", myList.getDataAt(1));
+        myList.deleteDataAt(0);
+        assertEquals("Thompson", myList.getDataAt(0));
+        myList.deleteDataAt(1);
+        assertEquals(1, myList.getSize());
+        myList.deleteDataAt(0);
+        assertTrue(myList.isEmpty());
+    }
+
+    @Test
     public void testPop() {
         pushMany();
         assertEquals(123, myList.pop());
@@ -71,6 +86,8 @@ public class LinkedListTest {
     public void testPrint() {
         pushMany();
         assertEquals("[ 123, Potato, Thompson, Alex ]", myList.print());
+        LinkedList tempList = new LinkedList();
+        assertEquals("[  ]", tempList.print());
     }
 
     private void pushMany() {

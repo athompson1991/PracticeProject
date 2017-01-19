@@ -2,6 +2,7 @@ package com.preparation.randompractice;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.function.Predicate;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -124,6 +125,7 @@ public class FiveProblems {
 
     public static ArrayList get100Combinations() throws ScriptException {
         ArrayList out = new ArrayList();
+        char[] chars = {'+', ' ', '-'};
         return out;
     }
 }

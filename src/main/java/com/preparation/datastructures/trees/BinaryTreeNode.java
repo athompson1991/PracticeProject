@@ -20,11 +20,15 @@ public interface BinaryTreeNode<E> {
 
     void removeFromParent();
 
-    void traversePreOrder();
+    void traversePreOrder(Visitor visitor);
 
-    void traversePostOrder();
+    void traversePostOrder(Visitor visitor);
 
-    void traverseInOrder();
+    void traverseInOrder(Visitor visitor);
 
     void print();
+
+    public interface Visitor {
+        <E> void visit(BinaryTreeNode<E> node);
+    }
 }

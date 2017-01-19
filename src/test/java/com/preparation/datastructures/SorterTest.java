@@ -13,7 +13,7 @@ public class SorterTest extends TestCase {
     Sorter mySorter;
 
     public void setUp() {
-        mySorter = new Sorter();
+        mySorter = new Sorter(1000);
         mySorter.populateRandomArray();
     }
 

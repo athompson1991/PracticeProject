@@ -5,14 +5,13 @@ package com.preparation.datastructures.trees;
  */
 public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
     private E data;
-    private LinkedBinaryTreeNode<E> parent;
-    private LinkedBinaryTreeNode<E> left;
-    private LinkedBinaryTreeNode<E> right;
+    protected LinkedBinaryTreeNode<E> parent;
+    protected LinkedBinaryTreeNode<E> left;
+    protected LinkedBinaryTreeNode<E> right;
 
     LinkedBinaryTreeNode(E data) {
         this.data = data;
         this.parent = null;
-        this.left = null;
         this.left = null;
         this.right = null;
     }
@@ -25,7 +24,6 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
         return this.data;
     }
 
-    @Override
     public void setData(Object data) {
         this.data = (E) data;
     }
@@ -35,7 +33,7 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
     }
 
     public BinaryTreeNode getLeft() {
-        return left;
+        return this.left;
     }
 
     public BinaryTreeNode getRight() {
@@ -43,36 +41,67 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
     }
 
     public void setLeft(BinaryTreeNode newNode) {
+
         // Ask if casting is dangerous in a context like this
         // (i.e. if I implement a different kind of BinaryTreeNode using different data types
         // will it die on the checkNodeIsAncestor method?)
 
-        checkNodeIsAncestor((LinkedBinaryTreeNode<E>) newNode);
-
+        LinkedBinaryTreeNode fixedNode = (LinkedBinaryTreeNode<E>) newNode;
+        checkNodeIsAncestor(fixedNode);
+        if (this.left != null) {
+            left.parent = null;
+        }
+        setNodeBelowThis(fixedNode);
+        this.left = fixedNode;
     }
 
     public void setRight(BinaryTreeNode newNode) {
-
+        LinkedBinaryTreeNode fixedNode = (LinkedBinaryTreeNode<E>) newNode;
+        checkNodeIsAncestor(fixedNode);
+        if (this.right != null)
+            right.parent = null;
+        setNodeBelowThis(fixedNode);
+        this.right = fixedNode;
     }
 
     public void removeFromParent() {
-
+        if (parent != null) {
+            if (parent.left == this) {
+                parent.left = null;
+            } else if (parent.right == this) {
+                parent.right = null;
+            }
+        }
+        this.parent = null;
     }
 
-    public void traversePreOrder() {
-
+    public void traversePreOrder(Visitor visitor) {
+        visitor.visit(this);
+        if (this.left != null) this.left.traversePreOrder(visitor);
+        if (this.right != null) this.right.traversePreOrder(visitor);
     }
 
-    public void traversePostOrder() {
-
+    public void traversePostOrder(Visitor visitor) {
+        if (this.left != null) this.left.traversePostOrder(visitor);
+        if (this.right != null) this.right.traversePostOrder(visitor);
+        visitor.visit(this);
     }
 
-    public void traverseInOrder() {
-
+    public void traverseInOrder(Visitor visitor) {
+        if (this.left != null) this.left.traverseInOrder(visitor);
+        visitor.visit(this);
+        if (this.right != null) this.right.traverseInOrder(visitor);
     }
 
     public void print() {
-
+        String printData = String.valueOf(data);
+        int n = printData.length() + 2;
+        String headAndFoot = "";
+        for (int i = 0; i < n; i++) {
+            headAndFoot = headAndFoot + "#";
+        }
+        String outString = headAndFoot + "\n#" + printData + "#\n" + headAndFoot + "\n";
+        System.out.print(outString);
     }
 
     // Helper functions
@@ -82,4 +111,38 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
                 throw new IllegalArgumentException("Node is an ancestor");
         }
     }
+
+    private void setNodeBelowThis(LinkedBinaryTreeNode newNode) {
+        if (newNode != null) {
+            newNode.removeFromParent();
+            newNode.parent = this;
+        }
+    }
+
+    public boolean isLeaf() {
+        return this.left == null && this.right == null;
+    }
+
+    public LinkedBinaryTreeNode getRandomLeaf() {
+        boolean goLeft = Math.random() - 0.5 > 0;
+
+        if (this.isLeaf()) {
+            return this;
+        } else {
+            if (goLeft) {
+                try {
+                    return this.left.getRandomLeaf();
+                } catch (Exception e) {
+                    return this.right.getRandomLeaf();
+                }
+            } else {
+                try {
+                    return this.right.getRandomLeaf();
+                } catch (Exception e) {
+                    return this.left.getRandomLeaf();
+                }
+            }
+        }
+    }
+
 }

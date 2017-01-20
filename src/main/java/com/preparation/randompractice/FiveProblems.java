@@ -116,7 +116,31 @@ public class FiveProblems {
         return out;
     }
 
-    private static ArrayList produceAllCombinations() {
+    private static char[][] permutationCalculation() {
+        int total = (int) Math.pow(3, 8);
+        char[] operations = {'+', '-', ' '};
+        int[] index = new int[8];
+        char[][] out = new char[total][8];
+        int i = total;
+
+        while (i-- > 0) {
+            char[] temp = out[i];
+            for (int j = 0; j < 8; j++) {
+                if (index[j] >= 2) {
+                    index[j] = 0;
+                } else {
+                    index[j]++;
+                    break;
+                }
+            }
+            for (int k = 0; k < 8; k++) {
+                temp[k] = operations[index[k]];
+            }
+        }
+        return out;
+    }
+
+    private static ArrayList produceAllSums() {
         ArrayList out = new ArrayList();
         List oneToNine = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
 
@@ -126,6 +150,7 @@ public class FiveProblems {
     public static ArrayList get100Combinations() throws ScriptException {
         ArrayList out = new ArrayList();
         char[] chars = {'+', ' ', '-'};
+        char[][] outChar = permutationCalculation();
         return out;
     }
 }

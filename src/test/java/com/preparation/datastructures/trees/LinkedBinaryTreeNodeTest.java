@@ -46,12 +46,12 @@ public class LinkedBinaryTreeNodeTest {
     private void assignMany(int n) {
         for (int i = 0; i < n; i++) {
             int randData = (int) (Math.random() * 50 - 25);
-            boolean direction = randData > 0;
             BinaryTreeNode tempNode = new LinkedBinaryTreeNode(randData);
-            if (direction) {
-                myTree.setLeft(tempNode);
+            BinaryTreeNode targetNode = myTree.getRandomLeaf();
+            if (Math.random() - 0.5 > 0) {
+                targetNode.setLeft(tempNode);
             } else {
-                myTree.setRight(tempNode);
+                targetNode.setRight(tempNode);
             }
         }
     }
@@ -82,8 +82,8 @@ public class LinkedBinaryTreeNodeTest {
         myTree.traversePreOrder(visitor);
     }
 
-    @After
-    public void tearDown() {
-        System.setOut(null);
-    }
+//    @After
+//    public void tearDown() {
+//        System.setOut(null);
+//    }
 }

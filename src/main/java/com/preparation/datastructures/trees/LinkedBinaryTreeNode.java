@@ -59,17 +59,6 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
         this.right = fixedNode;
     }
 
-    public void removeFromParent() {
-        if (parent != null) {
-            if (parent.left == this) {
-                parent.left = null;
-            } else if (parent.right == this) {
-                parent.right = null;
-            }
-        }
-        this.parent = null;
-    }
-
     public void traversePreOrder(Visitor visitor) {
         visitor.visit(this);
         if (this.left != null) this.left.traversePreOrder(visitor);
@@ -100,6 +89,18 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
     }
 
     // Helper functions
+
+    public void removeFromParent() {
+        if (parent != null) {
+            if (parent.left == this) {
+                parent.left = null;
+            } else if (parent.right == this) {
+                parent.right = null;
+            }
+        }
+        this.parent = null;
+    }
+
     private void checkNodeIsAncestor(LinkedBinaryTreeNode<E> check) {
         for (LinkedBinaryTreeNode<E> temp = this; temp.parent != null; temp = temp.parent) {
             if (temp == check)

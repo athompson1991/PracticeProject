@@ -1,13 +1,10 @@
 package com.preparation.datastructures.trees;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -43,30 +40,6 @@ public class LinkedBinaryTreeNodeTest {
         assertNull(myTree.getLeft());
     }
 
-    private void assignMany(int n) {
-        for (int i = 0; i < n; i++) {
-            int randData = (int) (Math.random() * 50 - 25);
-            BinaryTreeNode tempNode = new LinkedBinaryTreeNode(randData);
-            BinaryTreeNode targetNode = myTree.getRandomLeaf();
-            if (Math.random() - 0.5 > 0) {
-                targetNode.setLeft(tempNode);
-            } else {
-                targetNode.setRight(tempNode);
-            }
-        }
-    }
-
-    @Test
-    public void getRandomLeaf() {
-        BinaryTreeNode testNode;
-        myTree.setLeft(new LinkedBinaryTreeNode("hello"));
-        myTree.setRight(new LinkedBinaryTreeNode("world"));
-        myTree.getLeft().setLeft(new LinkedBinaryTreeNode("!!!"));
-        myTree.getLeft().getLeft().setLeft(new LinkedBinaryTreeNode("Potato"));
-        myTree.getLeft().getLeft().getLeft().setRight(new LinkedBinaryTreeNode("Hashbrowns"));
-        assertTrue(myTree.getRandomLeaf().isLeaf());
-    }
-
     @Test
     public void print() {
         System.setOut(new PrintStream(outContent));
@@ -82,8 +55,27 @@ public class LinkedBinaryTreeNodeTest {
         myTree.traversePreOrder(visitor);
     }
 
-//    @After
-//    public void tearDown() {
-//        System.setOut(null);
-//    }
+    @Test
+    public void getRandomLeaf() {
+        BinaryTreeNode testNode;
+        myTree.setLeft(new LinkedBinaryTreeNode("hello"));
+        myTree.setRight(new LinkedBinaryTreeNode("world"));
+        myTree.getLeft().setLeft(new LinkedBinaryTreeNode("!!!"));
+        myTree.getLeft().getLeft().setLeft(new LinkedBinaryTreeNode("Potato"));
+        myTree.getLeft().getLeft().getLeft().setRight(new LinkedBinaryTreeNode("Hashbrowns"));
+        assertTrue(myTree.getRandomLeaf().isLeaf());
+    }
+
+    private void assignMany(int n) {
+        for (int i = 0; i < n; i++) {
+            int randData = (int) (Math.random() * 50 - 25);
+            BinaryTreeNode tempNode = new LinkedBinaryTreeNode(randData);
+            BinaryTreeNode targetNode = myTree.getRandomLeaf();
+            if (Math.random() - 0.5 > 0) {
+                targetNode.setLeft(tempNode);
+            } else {
+                targetNode.setRight(tempNode);
+            }
+        }
+    }
 }

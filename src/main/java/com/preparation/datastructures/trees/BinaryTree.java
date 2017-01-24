@@ -10,15 +10,17 @@ public interface BinaryTree<E> {
 
     BinaryTreeNode BinaryTree(BinaryTree leftTree, E data, BinaryTree rightTree);
 
-    BinaryTreeNode makeRoot(E data);
+    void makeRoot(E data);
 
-    BinaryTreeNode makeLeftChild(BinaryTreeNode parent, E data);
+    void makeLeftChild(BinaryTreeNode parent, E data);
 
-    BinaryTreeNode makeRightChild(BinaryTreeNode parent, E data);
+    void makeRightChild(BinaryTreeNode parent, E data);
 
     void remove(BinaryTreeNode target);
 
     BinaryTreeNode root();
 
     boolean contains(E data);
+
+    boolean isEmpty();
 }

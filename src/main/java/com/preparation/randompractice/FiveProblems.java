@@ -116,41 +116,74 @@ public class FiveProblems {
         return out;
     }
 
-    private static char[][] permutationCalculation() {
-        int total = (int) Math.pow(3, 8);
-        char[] operations = {'+', '-', ' '};
-        int[] index = new int[8];
-        char[][] out = new char[total][8];
+    private static char[][] permutationCalculation(int k, char[] charArray) {
+        int n = charArray.length;
+        int total = (int) Math.pow(n, k);
+        int[] index = new int[k];
+        char[][] out = new char[total][k];
         int i = total;
 
         while (i-- > 0) {
-            char[] temp = out[i];
-            for (int j = 0; j < 8; j++) {
-                if (index[j] >= 2) {
+            for (int j = 0; j < k; j++) {
+                if (index[j] >= n - 1) {
                     index[j] = 0;
                 } else {
                     index[j]++;
                     break;
                 }
             }
-            for (int k = 0; k < 8; k++) {
-                temp[k] = operations[index[k]];
+            for (int j = 0; j < k; j++) {
+                out[i][j] = charArray[index[j]];
             }
         }
         return out;
     }
 
-    private static ArrayList produceAllSums() {
+    private static ArrayList listFromCharArray(char[] charArray) {
         ArrayList out = new ArrayList();
-        List oneToNine = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
+        for (int i = 0; i < charArray.length; i++) {
+            out.add(charArray[i]);
+        }
+        return out;
+    }
 
+    private static String listToString(List in) {
+        String out = "";
+        for (int i = 0; i < in.size(); i++) {
+            out = out + in.get(i);
+        }
+        return out;
+    }
+
+    private static HashMap<String, List> produceAllSums() throws ScriptException {
+        HashMap out = new HashMap<String, List>();
+        List<Integer> sums = new ArrayList();
+        List<String> strings = new ArrayList();
+        List oneToNine = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
+        char[] operators = {'+', '-', ' '};
+        char[][] outChar = permutationCalculation(8, operators);
+        for (int i = 0; i < outChar.length; i++) {
+            char[] fromArray = outChar[i];
+            ArrayList permutations = listFromCharArray(fromArray);
+            List arithmetic = combineLists(oneToNine, permutations);
+            String stringRepresentation = listToString(arithmetic).replace(" ", "");
+            int sum = evalString(stringRepresentation);
+            sums.add(sum);
+            strings.add(stringRepresentation);
+        }
+        out.put("string", strings);
+        out.put("sum", sums);
         return out;
     }
 
     public static ArrayList get100Combinations() throws ScriptException {
         ArrayList out = new ArrayList();
-        char[] chars = {'+', ' ', '-'};
-        char[][] outChar = permutationCalculation();
+        HashMap<String, List> main = produceAllSums();
+        for (int i = 0; i < main.get("string").size(); i++) {
+            if ((Integer) main.get("sum").get(i) == 100)
+                out.add(main.get("string").get(i));
+
+        }
         return out;
     }
 }

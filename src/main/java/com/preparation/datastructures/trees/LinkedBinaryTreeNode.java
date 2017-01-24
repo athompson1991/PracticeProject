@@ -41,11 +41,6 @@ public class LinkedBinaryTreeNode<E> implements BinaryTreeNode {
     }
 
     public void setLeft(BinaryTreeNode newNode) {
-
-        // Ask if casting is dangerous in a context like this
-        // (i.e. if I implement a different kind of BinaryTreeNode using different data types
-        // will it die on the checkNodeIsAncestor method?)
-
         LinkedBinaryTreeNode fixedNode = (LinkedBinaryTreeNode<E>) newNode;
         checkNodeIsAncestor(fixedNode);
         if (this.left != null) {

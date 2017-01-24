@@ -1,5 +1,6 @@
 package com.preparation.randompractice;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.script.ScriptException;
@@ -48,6 +49,7 @@ public class FiveProblemsTest {
         assertEquals(201100, FiveProblems.maxNumber(testList));
     }
 
+    @Ignore
     @Test
     public void makeAllCombinations() throws ScriptException {
         ArrayList testList = new ArrayList();

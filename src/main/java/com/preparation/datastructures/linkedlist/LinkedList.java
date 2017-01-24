@@ -8,7 +8,6 @@ public class LinkedList {
     private LinkedListNode head = null;
     private int size;
 
-
     private class LinkedListNode {
         private LinkedListNode next;
         private LinkedListNode previous;
@@ -25,7 +24,7 @@ public class LinkedList {
         }
     }
 
-    public String print() {
+    public void println() {
         String out = "";
         LinkedListNode temp = head;
         if (size == 0) {
@@ -39,7 +38,7 @@ public class LinkedList {
             }
             out = out + " ]";
         }
-        return out;
+        System.out.println(out);
     }
 
     public int getSize() {
@@ -55,7 +54,7 @@ public class LinkedList {
         return head.getData();
     }
 
-    LinkedList() {
+    public LinkedList() {
         size = 0;
     }
 
@@ -115,7 +114,6 @@ public class LinkedList {
             prevNode.next = nextNode;
             size--;
         }
-        System.out.println(print());
     }
 
     public void insertBefore(Object data, int i) {

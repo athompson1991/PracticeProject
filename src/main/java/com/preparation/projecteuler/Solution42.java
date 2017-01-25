@@ -9,4 +9,8 @@ public class Solution42 extends AbstractSolution implements Solution {
         solutionNumber = 42;
     }
 
+    private int triangleNumberCalculation(int n) {
+        return (n * (n + 1)) / 2;
+    }
+
 }

@@ -5,7 +5,8 @@ package com.preparation.projecteuler;
  */
 public class Solution42 extends AbstractSolution implements Solution {
 
-    public void printSolution() {
-        System.out.println("solution 42: ");
+    Solution42() {
+        solutionNumber = 42;
     }
+
 }

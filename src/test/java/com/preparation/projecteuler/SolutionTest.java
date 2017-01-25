@@ -28,6 +28,7 @@ public class SolutionTest {
             try {
                 AbstractSolution temp = (AbstractSolution) solution.newInstance();
                 assertFalse(temp.isSolved());
+                temp.printSolution();
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

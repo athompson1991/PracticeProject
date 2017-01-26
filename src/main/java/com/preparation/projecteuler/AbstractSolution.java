@@ -6,8 +6,10 @@ package com.preparation.projecteuler;
 public class AbstractSolution {
     protected boolean solved = false;
     protected int solutionNumber;
+    protected Object solution;
 
     public AbstractSolution() {
+        System.out.println("Abstract constructor.");
         solutionNumber = 0;
     }
 
@@ -16,10 +18,12 @@ public class AbstractSolution {
     }
 
     public void solve() {
+        solution = null;
         System.out.println("Abstract solve method.");
     }
 
     public boolean isSolved() {
+        System.out.println("Abstract isSolved method.");
         return solved;
     }
 }

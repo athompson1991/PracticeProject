@@ -8,8 +8,7 @@ public class AbstractSolution {
     protected int solutionNumber;
     protected Object solution;
 
-    public AbstractSolution() {
-        System.out.println("Abstract constructor.");
+    protected AbstractSolution() {
         solutionNumber = 0;
     }
 
@@ -26,4 +25,5 @@ public class AbstractSolution {
         System.out.println("Abstract isSolved method.");
         return solved;
     }
+
 }

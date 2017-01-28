@@ -8,6 +8,7 @@ import java.util.Set;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by aleth on 1/24/2017.
@@ -35,5 +36,14 @@ public class SolutionTest {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Test
+    public void problem42() {
+        Solution42 solution = new Solution42();
+        assertEquals(55, solution.triangleNumberCalculation(10));
+        assertEquals(55, solution.valueOfString("SKY"));
+
+        solution.handleFile();
     }
 }

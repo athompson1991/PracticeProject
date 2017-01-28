@@ -1,12 +1,12 @@
 package com.preparation.datastructures.trees;
 
 /**
- * Created by aleth on 12/6/2016.
+ * Created by aleth on 1/18/2017.
  */
 public interface BinaryTreeNode<E> {
-    void setData(E data);
-
     E getData();
+
+    void setData(E data);
 
     BinaryTreeNode<E> getParent();
 
@@ -14,17 +14,19 @@ public interface BinaryTreeNode<E> {
 
     BinaryTreeNode<E> getRight();
 
-    void setLeft(BinaryTreeNode<E> data);
+    void setLeft(BinaryTreeNode<E> newNode);
 
-    void setRight(BinaryTreeNode<E> data);
+    void setRight(BinaryTreeNode<E> newNode);
 
     void removeFromParent();
 
-    void traversePreorder(BinaryTreeNode.Visitor visitor);
+    void traversePreOrder(Visitor visitor);
 
-    void traversePostorder(BinaryTreeNode.Visitor visitor);
+    void traversePostOrder(Visitor visitor);
 
-    void traverseInorder(BinaryTreeNode.Visitor visitor);
+    void traverseInOrder(Visitor visitor);
+
+    void print();
 
     public interface Visitor {
         <E> void visit(BinaryTreeNode<E> node);

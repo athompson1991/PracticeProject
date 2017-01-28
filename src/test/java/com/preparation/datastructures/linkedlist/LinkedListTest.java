@@ -45,15 +45,40 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testDeleteAt() {
+        pushMany();
+        assertEquals("Potato", myList.getDataAt(1));
+        myList.deleteDataAt(1);
+        assertEquals("Thompson", myList.getDataAt(1));
+        myList.deleteDataAt(0);
+        assertEquals("Thompson", myList.getDataAt(0));
+        myList.deleteDataAt(1);
+        assertEquals(1, myList.getSize());
+        myList.deleteDataAt(0);
+        assertTrue(myList.isEmpty());
+    }
+
+    @Test
     public void testPop() {
         pushMany();
         assertEquals(123, myList.pop());
-        assertEquals(3, myList.getSize());
-        myList.pop();
-        myList.pop();
-//        myList.pop();
-        assertTrue(myList.isEmpty());
+        assertEquals("Potato", myList.pop());
+        assertEquals("Thompson", myList.pop());
+        assertEquals("Alex", myList.pop());
         assertNull(myList.pop());
+        assertTrue(myList.isEmpty());
+        myList.push("Final test");
+        assertEquals("Final test", myList.pop());
+    }
+
+    @Test
+    public void testReverse() {
+        pushMany();
+        myList.reverse();
+        assertEquals("Alex", myList.pop());
+        assertEquals("Thompson", myList.pop());
+        assertEquals("Potato", myList.pop());
+        assertEquals(123, myList.pop());
     }
 
     private void pushMany() {

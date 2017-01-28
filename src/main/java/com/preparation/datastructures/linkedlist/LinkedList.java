@@ -9,7 +9,6 @@ public class LinkedList {
     private int size;
 
     private class LinkedListNode {
-
         private LinkedListNode next;
         private LinkedListNode previous;
         private Object data = null;
@@ -23,18 +22,39 @@ public class LinkedList {
         public Object getData() {
             return this.data;
         }
+    }
 
+    public void println() {
+        String out = "";
+        LinkedListNode temp = head;
+        if (size == 0) {
+            out = "[  ]";
+        } else {
+            String firstEntry = String.valueOf(head.getData());
+            out = "[ " + firstEntry;
+            while (temp.next != null) {
+                temp = temp.next;
+                out = out + ", " + String.valueOf(temp.getData());
+            }
+            out = out + " ]";
+        }
+        System.out.println(out);
     }
 
     public int getSize() {
         return size;
     }
 
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public Object peek() {
         return head.getData();
     }
 
-    LinkedList() {
+    public LinkedList() {
         size = 0;
     }
 
@@ -43,12 +63,26 @@ public class LinkedList {
             head = new LinkedListNode(null, null, data);
         } else {
             head = new LinkedListNode(null, head, data);
+            head.next.previous = head;
         }
         size++;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
+    public Object pop() {
+        Object out;
+        if (size == 0) {
+            out = null;
+        } else if (size == 1) {
+            out = head.getData();
+            head = null;
+            size--;
+        } else {
+            out = head.getData();
+            head = head.next;
+            head.previous = null;
+            size--;
+        }
+        return out;
     }
 
     public Object getDataAt(int i) {
@@ -57,16 +91,53 @@ public class LinkedList {
             out = null;
         } else {
             LinkedListNode temp = loopToThisNode(i);
-            temp = temp.next;
             out = temp.getData();
         }
         return out;
     }
 
+    public void deleteDataAt(int i) {
+        if (i < 0 | i > size) {
+            throw new IndexOutOfBoundsException();
+        } else if (i == 0) {
+            Object temp = pop();
+        } else if (i == size - 1) {
+            LinkedListNode temp = loopToThisNode(i);
+            temp.previous.next = null;
+            temp = null;
+            size--;
+        } else {
+            LinkedListNode temp = loopToThisNode(i);
+            LinkedListNode prevNode = temp.previous;
+            LinkedListNode nextNode = temp.next;
+            nextNode.previous = prevNode;
+            prevNode.next = nextNode;
+            size--;
+        }
+    }
+
     public void insertBefore(Object data, int i) {
         LinkedListNode temp = loopToThisNode(i);
+        temp = temp.previous;
         temp.next = new LinkedListNode(temp, temp.next, data);
         size++;
+    }
+
+    public void reverse() {
+        LinkedListNode currentNode = head;
+        LinkedListNode nextNode;
+        LinkedListNode workNode = null;
+
+        while (currentNode.next != null) {
+            nextNode = currentNode.next;
+            currentNode.previous = nextNode;
+            currentNode.next = workNode;
+            workNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        head = currentNode;
+        head.next = workNode;
     }
 
     private LinkedListNode loopToThisNode(int i) {
@@ -75,13 +146,6 @@ public class LinkedList {
             temp = temp.next;
         }
         return temp;
-    }
-
-    public Object pop() {
-        Object out = head.getData();
-        head = head.next;
-        size--;
-        return out;
     }
 
 }

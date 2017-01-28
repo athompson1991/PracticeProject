@@ -8,11 +8,20 @@ import java.util.Random;
  */
 public class Sorter {
 
-    private int arraySize = 1000;
+    private int arraySize;
     private int maxSize = 1000;
     private boolean isSorted;
     private Random randomizer = new Random();
-    private final int[] array = new int[arraySize];
+    private final int[] array;
+
+    Sorter(int arraySize) {
+        this.arraySize = arraySize;
+        array = new int[arraySize];
+    }
+
+    Sorter() {
+        this(1000);
+    }
 
     public void populateRandomArray() {
         for(int i = 0; i < arraySize; i++){

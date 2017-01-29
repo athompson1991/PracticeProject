@@ -13,7 +13,11 @@ public class AbstractSolution {
     }
 
     public void printSolution() {
-        System.out.println("Solution " + String.valueOf(solutionNumber) + ":");
+        System.out.println("Solution " + String.valueOf(solutionNumber) + ": " + String.valueOf(solution));
+    }
+
+    public Object getSolution() {
+        return solution;
     }
 
     public void solve() {

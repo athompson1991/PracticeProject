@@ -43,7 +43,13 @@ public class SolutionTest {
         Solution42 solution = new Solution42();
         assertEquals(55, solution.triangleNumberCalculation(10));
         assertEquals(55, solution.valueOfString("SKY"));
+        assertTrue(solution.isTriangle("SKY"));
+        assertFalse(solution.isTriangle("SKZ"));
 
         solution.handleFile();
+        solution.solve();
+        solution.printSolution();
+
+        assertEquals(162, solution.getSolution());
     }
 }

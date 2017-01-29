@@ -14,6 +14,7 @@ public class Solution42 extends AbstractSolution implements Solution {
 
     private ResourcesHandler resourcesHandler;
     private String raw;
+    private String[] cleaned;
     HashMap<String, Integer> alphabet = new HashMap<String, Integer>();
     List<Integer> triangleValues = new LinkedList<Integer>();
 
@@ -37,12 +38,13 @@ public class Solution42 extends AbstractSolution implements Solution {
     public void handleFile() {
         raw = resourcesHandler.getFile("p042_words.txt");
         raw = raw.split("\n", 2)[0];
-        System.out.println(raw);
+        raw = raw.replaceAll("\"", "");
+        cleaned = raw.split(",");
     }
 
     private void makeAlphabet() {
         int j = 1;
-        for (char i = 'A'; i < 'Z'; i++) {
+        for (char i = 'A'; i <= 'Z'; i++) {
             alphabet.put(String.valueOf(i), j);
             j++;
         }
@@ -50,7 +52,12 @@ public class Solution42 extends AbstractSolution implements Solution {
 
 
     public void solve() {
-        System.out.print(triangleNumberCalculation(10));
+        int sum = 0;
+        for(int i = 0; i < cleaned.length; i++) {
+            if(isTriangle(cleaned[i]))
+                sum++;
+        }
+        this.solution = sum;
     }
 
     public int valueOfString(String in) {
@@ -60,5 +67,10 @@ public class Solution42 extends AbstractSolution implements Solution {
             out = out + alphabet.get(checkVal);
         }
         return out;
+    }
+
+    public boolean isTriangle(String in) {
+        int checkValue = valueOfString(in);
+        return triangleValues.contains(checkValue);
     }
 }

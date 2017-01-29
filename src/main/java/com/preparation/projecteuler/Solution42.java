@@ -23,6 +23,7 @@ public class Solution42 extends AbstractSolution implements Solution {
         resourcesHandler = new ResourcesHandler();
         this.makeAlphabet();
         this.populateList();
+        this.handleFile();
     }
 
     private void populateList() {

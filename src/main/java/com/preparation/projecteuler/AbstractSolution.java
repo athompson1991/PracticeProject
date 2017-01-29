@@ -22,11 +22,9 @@ public class AbstractSolution {
 
     public void solve() {
         solution = null;
-        System.out.println("Abstract solve method.");
     }
 
     public boolean isSolved() {
-        System.out.println("Abstract isSolved method.");
         return solved;
     }
 

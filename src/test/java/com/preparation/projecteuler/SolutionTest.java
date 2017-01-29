@@ -29,6 +29,7 @@ public class SolutionTest {
             try {
                 AbstractSolution temp = (AbstractSolution) solution.newInstance();
                 assertFalse(temp.isSolved());
+                temp.solve();
                 temp.printSolution();
             } catch (InstantiationException e) {
                 e.printStackTrace();
@@ -36,6 +37,18 @@ public class SolutionTest {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Test
+    public void problem15() {
+        Solution15 solution = new Solution15();
+        solution.setGridSize(2);
+        solution.solve();
+        assertEquals(Long.valueOf(6), solution.getSolution());
+
+        solution.setGridSize(20);
+        solution.solve();
+        solution.printSolution();
     }
 
     @Test
@@ -52,4 +65,5 @@ public class SolutionTest {
 
         assertEquals(162, solution.getSolution());
     }
+
 }

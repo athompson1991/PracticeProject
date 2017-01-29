@@ -1,6 +1,5 @@
 package com.preparation.projecteuler;
 
-import com.preparation.datastructures.hashtable.HashTable;
 import com.preparation.helpers.ResourcesHandler;
 
 import java.util.HashMap;

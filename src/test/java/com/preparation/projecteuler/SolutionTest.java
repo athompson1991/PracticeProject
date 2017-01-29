@@ -66,4 +66,14 @@ public class SolutionTest {
         assertEquals(162, solution.getSolution());
     }
 
+    @Test
+    public void problem48() {
+        Solution48 solution = new Solution48();
+        solution.setN(10);
+        solution.solve();
+        assertEquals("0405071317", solution.getSolution());
+        solution.setN(1000);
+        solution.solve();
+        solution.printSolution();
+    }
 }

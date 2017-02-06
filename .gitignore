@@ -1,3 +1,5 @@
-.idea/*
-target/*
 /src/main/java/com/preparation/randompractice/ManualTester.java
+.idea/
+src/test/java/com/preparation/parking/gui/
+src/test/resources/
+target/

@@ -76,4 +76,16 @@ public class SolutionTest {
         solution.solve();
         solution.printSolution();
     }
+
+    @Test
+    public void problem50() {
+        Solution50 solution50 =  new Solution50();
+        solution50.solve();
+        assertEquals(41, solution50.getSolution());
+        solution50.setN(1000);
+        solution50.solve();
+        assertEquals(953, solution50.getSolution());
+        solution50.setN(1000000);
+        solution50.solve();
+    }
 }

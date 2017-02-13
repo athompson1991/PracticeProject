@@ -3,7 +3,7 @@ package com.preparation.projecteuler;
 /**
  * Created by aleth on 1/24/2017.
  */
-public class AbstractSolution {
+public abstract class AbstractSolution implements SolutionInterface{
     protected boolean solved = false;
     protected int solutionNumber;
     protected Object solution;

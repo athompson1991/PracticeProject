@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Alex on 2/12/2017 at 8:21 PM.
  */
 public class Solution50 extends AbstractSolution {
-    Utilities utillities = new Utilities();
+    Utilities utilities = new Utilities();
     List<Integer> primeList;
     List<Integer> currentMaxList;
     private int n;
@@ -21,7 +21,7 @@ public class Solution50 extends AbstractSolution {
     private void populatePrimeList() {
         primeList = new LinkedList<>();
         for (int i = 1; i < n; i++) {
-            if (utillities.isPrime(i))
+            if (utilities.isPrime(i))
                 primeList.add(i);
         }
     }
@@ -55,7 +55,6 @@ public class Solution50 extends AbstractSolution {
                     if(tempList.size() > maxLength) {
                         solution = tempSum;
                         maxLength = tempList.size();
-                        System.out.println("maxLength: " + maxLength + " tempSum: " + tempSum + " i: " + i + " j: " + j + " maxIndex: " + maxIndex);
                     }
                 }
 
@@ -64,7 +63,7 @@ public class Solution50 extends AbstractSolution {
     }
 
     private boolean checkList(int tempSum) {
-        return utillities.isPrime(tempSum) & tempSum < n;
+        return utilities.isPrime(tempSum) & tempSum < n;
     }
 
     public void setN(int n) {

@@ -89,4 +89,13 @@ public class SolutionTest {
         solution50.solve();
         solution50.printSolution();
     }
+
+    @Test
+    public void problem46() {
+        Solution46 solution46 = new Solution46();
+        assertTrue(solution46.valueSupportsConjecture(33));
+        assertTrue(solution46.valueSupportsConjecture(27));
+        solution46.solve();
+        solution46.printSolution();
+    }
 }

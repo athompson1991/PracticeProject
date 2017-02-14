@@ -87,5 +87,6 @@ public class SolutionTest {
         assertEquals(953, solution50.getSolution());
         solution50.setN(1000000);
         solution50.solve();
+        solution50.printSolution();
     }
 }

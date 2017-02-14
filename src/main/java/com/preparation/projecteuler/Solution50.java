@@ -9,7 +9,7 @@ import java.util.List;
 public class Solution50 extends AbstractSolution {
     Utilities utillities = new Utilities();
     List<Integer> primeList;
-    List<Integer> currentMaxList = new LinkedList<>();
+    List<Integer> currentMaxList;
     private int n;
 
     public Solution50() {
@@ -28,37 +28,43 @@ public class Solution50 extends AbstractSolution {
 
     private int sumFromList(List<Integer> in) {
         int out = 0;
-        for(int i = 0; i < in.size(); i++)
-            out+=in.get(i);
+        for (int i = 0; i < in.size(); i++)
+            out += in.get(i);
         return out;
     }
 
     public void solve() {
+        currentMaxList = new LinkedList<>();
         populatePrimeList();
         int maxIndex = 0;
         int x = 0;
-        while (primeList.get(x) + primeList.get(x + 1) <= n) {
+        while (primeList.get(x) + primeList.get(x + 1) <= this.n) {
             maxIndex = x;
             x++;
         }
 
+        int maxLength = 0;
         for (int i = 0; i < maxIndex; i++) {
+            List tempList = new LinkedList();
             int tempSum = 0;
-            List<Integer> tempList = new LinkedList<>();
             for (int j = i; j < maxIndex & tempSum < n; j++) {
                 int currentPrime = primeList.get(j);
                 tempList.add(currentPrime);
-                tempSum += currentPrime;
-                if (utillities.isPrime(tempSum)) {
-                    System.out.println(sumFromList(currentMaxList));
-                    if (tempList.size() >= currentMaxList.size() & sumFromList(tempList) < n) {
-//                        System.out.println("Sum: " + tempSum + " List: " + tempList + " length: " + tempList.size() );
-                        currentMaxList = tempList;
-                        this.solution = tempSum;
+                tempSum+=currentPrime;
+                if(checkList(tempSum)) {
+                    if(tempList.size() > maxLength) {
+                        solution = tempSum;
+                        maxLength = tempList.size();
+                        System.out.println("maxLength: " + maxLength + " tempSum: " + tempSum + " i: " + i + " j: " + j + " maxIndex: " + maxIndex);
                     }
                 }
+
             }
         }
+    }
+
+    private boolean checkList(int tempSum) {
+        return utillities.isPrime(tempSum) & tempSum < n;
     }
 
     public void setN(int n) {

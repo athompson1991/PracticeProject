@@ -1,26 +1,19 @@
 package com.preparation.datastructures.trees;
 
 /**
- * Created by aleth on 1/24/2017.
+ * Created by Alex on 2/15/2017 at 12:51 PM.
  */
-public interface BinaryTree<E> {
-    void BinaryTree();
-
-    void BinaryTree(E data);
-
-    BinaryTreeNode BinaryTree(BinaryTree leftTree, E data, BinaryTree rightTree);
-
-    void makeRoot(E data);
-
-    void makeLeftChild(BinaryTreeNode parent, E data);
-
-    void makeRightChild(BinaryTreeNode parent, E data);
-
-    void remove(BinaryTreeNode target);
-
-    BinaryTreeNode root();
-
-    boolean contains(E data);
-
-    boolean isEmpty();
+public interface BinaryTree {
+    void add(Integer value);
+    void delete(Integer value);
+    Boolean search(Integer value);
+    TreeNode get(Integer value);
+    Boolean isComplete();
+    Boolean isFull();
+    Integer getHeight();
+    void print();
+    void traverseInOrder();
+    void traversePreOrder();
+    void traversePostOrder();
+    void traverseLevelOrder();
 }

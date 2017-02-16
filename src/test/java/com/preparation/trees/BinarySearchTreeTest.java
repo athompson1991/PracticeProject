@@ -26,9 +26,22 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(20);
         binarySearchTree.add(16);
         binarySearchTree.add(19);
+        binarySearchTree.add(30);
+        binarySearchTree.add(19);
+        binarySearchTree.add(10);
+        binarySearchTree.add(14);
+        System.out.print("preorder:     ");
         binarySearchTree.traversePreOrder();
+        System.out.print("\n");
+        System.out.print("postorder:    ");
         binarySearchTree.traversePostOrder();
+        System.out.print("\n");
+        System.out.print("inorder:      ");
         binarySearchTree.traverseInOrder();
+        System.out.print("\n");
+        System.out.print("levelorder:   ");
+        binarySearchTree.traverseLevelOrder();
+        System.out.print("\n");
     }
 
     @Test

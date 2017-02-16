@@ -1,6 +1,10 @@
 package com.preparation.datastructures.trees;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.util.NoSuchElementException;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by Alex on 2/15/2017 at 1:19 PM.
@@ -140,8 +144,19 @@ public class LinkedBinarySearchTree implements BinaryTree {
         visitor.visit(treeNode);
     }
 
-    @Override
     public void traverseLevelOrder() {
+        Queue<TreeNode> queue = new LinkedBlockingQueue<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            dequeuePrint(queue);
+        }
+    }
+
+    private void dequeuePrint(Queue<TreeNode> printQueue) {
+        TreeNode poppedElement = printQueue.remove();
+        if (poppedElement.getLeft() != null) printQueue.add(poppedElement.getLeft());
+        if (poppedElement.getRight() != null) printQueue.add(poppedElement.getRight());
+        System.out.print(poppedElement.getData() + "  ");
 
     }
 }

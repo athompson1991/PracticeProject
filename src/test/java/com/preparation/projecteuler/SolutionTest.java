@@ -1,6 +1,7 @@
 package com.preparation.projecteuler;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.reflections.Reflections;
 
@@ -77,6 +78,7 @@ public class SolutionTest {
         solution.printSolution();
     }
 
+    @Ignore
     @Test
     public void problem50() {
         Solution50 solution50 =  new Solution50();

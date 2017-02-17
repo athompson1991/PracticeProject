@@ -16,13 +16,22 @@ public class TreeNode {
     TreeNode(Integer data){
         this.data = data;
     }
+
     TreeNode(Integer data, TreeNode left, TreeNode right){
         this.data = data;
         this.left = left;
         this.right = right;
     }
 
-    Boolean isLeaf() {
+    public Boolean isLeaf() {
         return this.left == null & this.right == null;
+    }
+
+    public int numberOfChildren() {
+        int out = 0;
+        if (this.left != null & this.right == null) out = 1;
+        if (this.left == null & this.right != null) out = 1;
+        if (this.left != null & this.right != null) out = 2;
+        return out;
     }
 }

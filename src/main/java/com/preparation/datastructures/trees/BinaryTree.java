@@ -10,7 +10,11 @@ public interface BinaryTree {
     TreeNode get(Integer value);
     Boolean isComplete();
     Boolean isFull();
+
+    Boolean isEmpty();
     Integer getHeight();
+
+    Integer getSize();
     void print();
     void traverseInOrder();
     void traversePreOrder();

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -30,6 +31,7 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(19);
         binarySearchTree.add(10);
         binarySearchTree.add(14);
+        assertEquals((Integer) 9, binarySearchTree.getSize());
         System.out.print("preorder:     ");
         binarySearchTree.traversePreOrder();
         System.out.print("\n");
@@ -54,6 +56,11 @@ public class BinarySearchTreeTest {
 
     @Test
     public void delete() {
+        addABunch();
+        binarySearchTree.delete(11);
+        assertEquals((Integer) 5, binarySearchTree.getSize());
+        assertFalse(binarySearchTree.search(11));
+        binarySearchTree.traverseInOrder();
     }
 
     public void addABunch() {

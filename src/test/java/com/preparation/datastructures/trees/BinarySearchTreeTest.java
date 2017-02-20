@@ -1,7 +1,5 @@
-package com.preparation.trees;
+package com.preparation.datastructures.trees;
 
-import com.preparation.datastructures.trees.BinaryTree;
-import com.preparation.datastructures.trees.LinkedBinarySearchTree;
 import org.junit.Before;
 import org.junit.Test;
 

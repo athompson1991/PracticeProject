@@ -33,17 +33,4 @@ public class TreeNode {
     }
 
 
-    public TreeNode getMin() {
-        getMin(this);
-    }
-
-    public TreeNode getMin(TreeNode temp) {
-        TreeNode out = null
-        if (temp.getLeft() == null)
-            out = this;
-        else {
-            out = getMin(temp);
-        }
-        return out;
-    }
 }

@@ -78,7 +78,6 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
             } else if (treeNode.isLeaf()) {
                 treeNode = null;
             } else if (treeNode.getRight() != null & treeNode.getLeft() != null) {
-                TreeNode replacement = treeNode.getRight().getMin();
 
             }
         }

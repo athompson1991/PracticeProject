@@ -24,6 +24,7 @@ public class SolutionTest {
         allSolutions = reflections.getSubTypesOf(AbstractSolution.class);
     }
 
+    @Ignore
     @Test
     public void solutionNotSolved() throws NoSuchMethodException {
         for (Class solution : allSolutions) {
@@ -92,6 +93,7 @@ public class SolutionTest {
         solution50.printSolution();
     }
 
+    @Ignore
     @Test
     public void problem46() {
         Solution46 solution46 = new Solution46();

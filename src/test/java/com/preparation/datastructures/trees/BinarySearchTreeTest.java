@@ -58,7 +58,6 @@ public class BinarySearchTreeTest {
         binarySearchTree.delete(11);
         assertEquals((Integer) 10, binarySearchTree.getSize());
         assertFalse(binarySearchTree.search(11));
-        binarySearchTree.traverseInOrder();
     }
 
     public void addABunch() {

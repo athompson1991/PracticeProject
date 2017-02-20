@@ -25,7 +25,7 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
             root = treeNode;
         else {
             TreeNode currentNode = root;
-            TreeNode parentNode = null;
+            TreeNode parentNode;
             Boolean run = true;
             while (run) {
                 parentNode = currentNode;
@@ -33,12 +33,14 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
                     currentNode = currentNode.getLeft();
                     if (currentNode == null) {
                         parentNode.setLeft(treeNode);
+                        parentNode.getLeft().setParent(parentNode);
                         run = false;
                     }
                 } else {
                     currentNode = currentNode.getRight();
                     if (currentNode == null) {
                         parentNode.setRight(treeNode);
+                        parentNode.getRight().setParent(parentNode);
                         run = false;
                     }
                 }
@@ -49,41 +51,40 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
 
     @Override
     public void delete(Integer value) {
-        TreeNode deleteNode = root;
+        TreeNode deleteNode;
         if (!search(value))
             throw new NoSuchElementException("Value not in tree.");
         else {
-            deleteNode = search(value,root, deleteNode);
+            deleteNode = search(value, root);
             delete(deleteNode);
         }
         size--;
     }
 
-    public void delete(TreeNode treeNode) {
-
+    private void delete(TreeNode treeNode) {
+        TreeNode parent = treeNode.getParent();
+        Boolean isLeftChild = treeNode.getData() < parent.getData();
+        if(isLeftChild) {
+            parent.setLeft(null);
+        } else {
+            parent.setRight(null);
+        }
     }
 
     @Override
     public Boolean search(Integer value) {
         boolean out = false;
-        TreeNode tempNode = root;
-        if (root == null)
-            out = false;
-        else if (value < root.getData()) {
-            tempNode = search(value, root.getLeft(), tempNode);
-        } else if (value > root.getData()) {
-            tempNode = search(value, root.getRight(), tempNode);
-        }
+        TreeNode tempNode = search(value, root);
         out = tempNode.getData() == value;
         return out;
     }
 
-    public TreeNode search(Integer value, TreeNode treeNode, TreeNode in) {
-        TreeNode out = in;
+    public TreeNode search(Integer value, TreeNode treeNode) {
+        TreeNode out = treeNode;
         if (treeNode.getData() < value & treeNode.getRight() != null) {
-            return search(value, treeNode.getRight(), in);
+            return search(value, treeNode.getRight());
         } else if (treeNode.getData() > value & treeNode.getLeft() != null) {
-            return search(value, treeNode.getLeft(), in);
+            return search(value, treeNode.getLeft());
         } else if (treeNode.getData() == value) {
             out = treeNode;
         }

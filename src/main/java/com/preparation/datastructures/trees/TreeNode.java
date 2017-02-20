@@ -12,6 +12,9 @@ public class TreeNode {
     @Getter @Setter private Integer data;
     @Getter @Setter private TreeNode left;
     @Getter @Setter private TreeNode right;
+    @Getter
+    @Setter
+    private TreeNode parent;
 
     TreeNode(Integer data){
         this.data = data;
@@ -21,17 +24,26 @@ public class TreeNode {
         this.data = data;
         this.left = left;
         this.right = right;
+        this.left.setParent(this);
+        this.right.setParent(this);
     }
 
     public Boolean isLeaf() {
         return this.left == null & this.right == null;
     }
 
-    public int numberOfChildren() {
-        int out = 0;
-        if (this.left != null & this.right == null) out = 1;
-        if (this.left == null & this.right != null) out = 1;
-        if (this.left != null & this.right != null) out = 2;
+
+    public TreeNode getMin() {
+        getMin(this);
+    }
+
+    public TreeNode getMin(TreeNode temp) {
+        TreeNode out = null
+        if (temp.getLeft() == null)
+            out = this;
+        else {
+            out = getMin(temp);
+        }
         return out;
     }
 }

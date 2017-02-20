@@ -54,20 +54,33 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
         else {
             delete(value, root);
         }
+        size--;
     }
 
     private void delete(Integer value, TreeNode treeNode) {
-        if (treeNode.isLeaf()) {
-            if (treeNode.getData() == value)
+        if (value < treeNode.getData()) {
+            if (treeNode.getLeft() != null) {
+                delete(value, treeNode.getLeft());
+            }
+        } else if (value > treeNode.getData()) {
+            if (treeNode.getRight() != null) {
+                delete(value, treeNode.getRight());
+            }
+        } else if (value == treeNode.getData()) {
+            if (treeNode.getLeft() == null & treeNode.getRight() != null) {
+                treeNode.getParent().setRight(treeNode.getRight());
+                treeNode.getRight().setParent(treeNode.getParent());
                 treeNode = null;
-        } else if (treeNode.numberOfChildren() == 1) {
-            if (treeNode.getLeft() == null) {
-
-            } else {
+            } else if (treeNode.getRight() == null & treeNode.getLeft() != null) {
+                treeNode.getParent().setLeft(treeNode.getLeft());
+                treeNode.getLeft().setParent(treeNode.getParent());
+                treeNode = null;
+            } else if (treeNode.isLeaf()) {
+                treeNode = null;
+            } else if (treeNode.getRight() != null & treeNode.getLeft() != null) {
+                TreeNode replacement = treeNode.getRight().getMin();
 
             }
-        } else if (treeNode.numberOfChildren() == 2) {
-
         }
     }
 

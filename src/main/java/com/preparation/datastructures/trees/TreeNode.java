@@ -1,5 +1,6 @@
 package com.preparation.datastructures.trees;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,12 +9,11 @@ import java.util.List;
 /**
  * Created by Alex on 2/15/2017 at 1:09 PM.
  */
+@Data
 public class TreeNode {
-    @Getter @Setter private Integer data;
-    @Getter @Setter private TreeNode left;
-    @Getter @Setter private TreeNode right;
-    @Getter
-    @Setter
+    private Integer data;
+    private TreeNode left;
+    private TreeNode right;
     private TreeNode parent;
 
     TreeNode(Integer data){

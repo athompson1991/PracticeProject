@@ -2,6 +2,7 @@ package com.preparation.datastructures.trees;
 
 import sun.reflect.generics.tree.Tree;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -13,8 +14,8 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
         super();
     }
 
-    public LinkedBinarySearchTree(Integer rootValue) {
-        super(rootValue);
+    public LinkedBinarySearchTree(TreeNode treeNode) {
+        super(treeNode);
     }
 
     @Override
@@ -64,10 +65,24 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
     private void delete(TreeNode treeNode) {
         TreeNode parent = treeNode.getParent();
         Boolean isLeftChild = treeNode.getData() < parent.getData();
-        if(isLeftChild) {
-            parent.setLeft(null);
+        if (treeNode.isLeaf()) {
+            if (isLeftChild) {
+                parent.setLeft(null);
+            } else {
+                parent.setRight(null);
+            }
+        } else if (treeNode.getRight() == null | treeNode.getLeft() == null) {
+            TreeNode newNode;
+            if (treeNode.getLeft() == null)
+                newNode = treeNode.getRight();
+            else
+                newNode = treeNode.getLeft();
+            if (isLeftChild)
+                parent.setLeft(newNode);
+            else
+                parent.setRight(newNode);
         } else {
-            parent.setRight(null);
+
         }
     }
 
@@ -89,6 +104,11 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
             out = treeNode;
         }
         return out;
+    }
+
+    @Override
+    public List getTraversalList() {
+        return super.getTraversalList();
     }
 
     @Override

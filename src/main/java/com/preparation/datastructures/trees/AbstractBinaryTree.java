@@ -19,11 +19,18 @@ public abstract class AbstractBinaryTree implements BinaryTree {
     @Data
     private class Visitor {
         private List valuesList;
+
         void visit(TreeNode node) {
             System.out.print(node.getData() + "  ");
         }
-        void addValue(TreeNode node) {valuesList.add(node.getData());}
-        void addValue(Integer value) {valuesList.add(value);}
+
+        void addValue(TreeNode node) {
+            valuesList.add(node.getData());
+        }
+
+        void addValue(Integer value) {
+            valuesList.add(value);
+        }
     }
 
     AbstractBinaryTree() {
@@ -32,11 +39,11 @@ public abstract class AbstractBinaryTree implements BinaryTree {
         this.size = 0;
     }
 
-    AbstractBinaryTree(Integer value) {
-        TreeNode treeNode = new TreeNode(value);
-        this.root = treeNode;
+    AbstractBinaryTree(TreeNode root) {
+        this.root = root;
         this.visitor = new Visitor();
-        this.size = 1;
+        this.traverseLevelOrder();
+        this.size = this.getTraversalList().size();
     }
 
     public Boolean isComplete() {
@@ -55,8 +62,33 @@ public abstract class AbstractBinaryTree implements BinaryTree {
         return size;
     }
 
+    public TreeNode getMin() {
+        return getMinOrMax(root, "min");
+    }
+
+    private TreeNode getMinOrMax(TreeNode treeNode, String option) {
+        TreeNode out = null;
+        if (treeNode.isLeaf())
+            out = treeNode;
+        else {
+            if (option == "min")
+                getMinOrMax(treeNode.getLeft(), "min");
+            else if (option == "max")
+                getMinOrMax(treeNode.getRight(), "max");
+        }
+        return out;
+    }
+
+    public TreeNode getMax() {
+        return getMinOrMax(root, "max");
+    }
+
     public void print() {
 
+    }
+
+    public List getTraversalList() {
+        return visitor.getValuesList();
     }
 
     public void traverseInOrder() {
@@ -113,7 +145,5 @@ public abstract class AbstractBinaryTree implements BinaryTree {
         return poppedElement.getData();
     }
 
-    public List getTraversalList() {
-        return visitor.getValuesList();
-    }
+
 }

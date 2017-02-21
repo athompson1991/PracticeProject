@@ -3,6 +3,10 @@ package com.preparation.datastructures.trees;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -50,6 +54,7 @@ public class BinarySearchTreeTest {
         assertTrue(binarySearchTree.search(12));
         assertFalse(binarySearchTree.search(100));
         assertTrue(binarySearchTree.search(15));
+        assertTrue(binarySearchTree.search(3));
     }
 
     @Test
@@ -58,6 +63,13 @@ public class BinarySearchTreeTest {
         binarySearchTree.delete(11);
         assertEquals((Integer) 10, binarySearchTree.getSize());
         assertFalse(binarySearchTree.search(11));
+        List testList = new LinkedList(Arrays.asList(10, 5, 17, 3, 12, 2, 4, 15, 14, 16));
+        binarySearchTree.traverseLevelOrder();
+
+        System.out.println("\n");
+
+        binarySearchTree.delete(17);
+        binarySearchTree.traverseLevelOrder();
     }
 
     public void addABunch() {

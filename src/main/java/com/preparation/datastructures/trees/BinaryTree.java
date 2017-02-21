@@ -1,5 +1,7 @@
 package com.preparation.datastructures.trees;
 
+import java.util.List;
+
 /**
  * Created by Alex on 2/15/2017 at 12:51 PM.
  */
@@ -20,4 +22,5 @@ public interface BinaryTree {
     void traversePreOrder();
     void traversePostOrder();
     void traverseLevelOrder();
+    List getTraversalList();
 }

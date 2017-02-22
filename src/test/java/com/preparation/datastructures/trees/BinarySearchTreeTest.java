@@ -68,8 +68,16 @@ public class BinarySearchTreeTest {
 
         System.out.println("\n");
 
-        binarySearchTree.delete(17);
+        binarySearchTree.add(13);
+        binarySearchTree.delete(12);
         binarySearchTree.traverseLevelOrder();
+        assertFalse(binarySearchTree.search(12));
+
+        System.out.println("\n");
+
+        binarySearchTree.delete(3);
+        binarySearchTree.traverseLevelOrder();
+        assertFalse(binarySearchTree.search(3));
     }
 
     public void addABunch() {

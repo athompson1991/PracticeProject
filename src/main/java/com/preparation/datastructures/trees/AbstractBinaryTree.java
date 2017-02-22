@@ -66,6 +66,10 @@ public abstract class AbstractBinaryTree implements BinaryTree {
         return getMinOrMax(root, "min");
     }
 
+    public TreeNode getMax() {
+        return getMinOrMax(root, "max");
+    }
+
     private TreeNode getMinOrMax(TreeNode treeNode, String option) {
         TreeNode out = null;
         if (treeNode.isLeaf())
@@ -77,10 +81,6 @@ public abstract class AbstractBinaryTree implements BinaryTree {
                 getMinOrMax(treeNode.getRight(), "max");
         }
         return out;
-    }
-
-    public TreeNode getMax() {
-        return getMinOrMax(root, "max");
     }
 
     public void print() {

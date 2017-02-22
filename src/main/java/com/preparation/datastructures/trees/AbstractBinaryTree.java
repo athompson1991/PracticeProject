@@ -108,13 +108,11 @@ public abstract class AbstractBinaryTree implements BinaryTree {
 
     private void traverseInOrder(TreeNode treeNode) {
         if (treeNode.getLeft() != null) traverseInOrder(treeNode.getLeft());
-        visitor.visit(treeNode);
         visitor.addValue(treeNode);
         if (treeNode.getRight() != null) traverseInOrder(treeNode.getRight());
     }
 
     public void traversePreOrder(TreeNode treeNode) {
-        visitor.visit(treeNode);
         visitor.addValue(treeNode);
         if (treeNode.getLeft() != null) traversePreOrder(treeNode.getLeft());
         if (treeNode.getRight() != null) traversePreOrder(treeNode.getRight());
@@ -123,7 +121,6 @@ public abstract class AbstractBinaryTree implements BinaryTree {
     private void traversePostOrder(TreeNode treeNode) {
         if (treeNode.getLeft() != null) traversePostOrder(treeNode.getLeft());
         if (treeNode.getRight() != null) traversePostOrder(treeNode.getRight());
-        visitor.visit(treeNode);
         visitor.addValue(treeNode);
     }
 
@@ -133,7 +130,6 @@ public abstract class AbstractBinaryTree implements BinaryTree {
         queue.add(root);
         while (!queue.isEmpty()) {
             Integer temp = dequeueValue(queue);
-            System.out.print(temp + "  ");
             visitor.addValue(temp);
         }
     }

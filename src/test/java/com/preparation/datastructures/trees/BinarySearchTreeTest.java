@@ -34,18 +34,6 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(10);
         binarySearchTree.add(14);
         assertEquals((Integer) 9, binarySearchTree.getSize());
-        System.out.print("preorder:     ");
-        binarySearchTree.traversePreOrder();
-        System.out.print("\n");
-        System.out.print("postorder:    ");
-        binarySearchTree.traversePostOrder();
-        System.out.print("\n");
-        System.out.print("inorder:      ");
-        binarySearchTree.traverseInOrder();
-        System.out.print("\n");
-        System.out.print("levelorder:   ");
-        binarySearchTree.traverseLevelOrder();
-        System.out.print("\n");
     }
 
     @Test
@@ -66,14 +54,12 @@ public class BinarySearchTreeTest {
         List testList = new LinkedList(Arrays.asList(10, 5, 17, 3, 12, 2, 4, 15, 14, 16));
         binarySearchTree.traverseLevelOrder();
 
-        System.out.println("\n");
 
         binarySearchTree.add(13);
         binarySearchTree.delete(12);
         binarySearchTree.traverseLevelOrder();
         assertFalse(binarySearchTree.search(12));
 
-        System.out.println("\n");
 
         binarySearchTree.delete(3);
         binarySearchTree.traverseLevelOrder();

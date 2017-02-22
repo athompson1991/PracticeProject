@@ -1,8 +1,5 @@
 package com.preparation.datastructures.trees;
 
-import com.preparation.projecteuler.AbstractSolution;
-import sun.reflect.generics.tree.Tree;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -67,11 +64,10 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
         TreeNode parent = treeNode.getParent();
         Boolean isLeftChild = treeNode.getData() < parent.getData();
         if (treeNode.isLeaf()) {
-            if (isLeftChild) {
+            if (isLeftChild)
                 parent.setLeft(null);
-            } else {
+            else
                 parent.setRight(null);
-            }
         } else if (treeNode.getRight() == null | treeNode.getLeft() == null) {
             TreeNode child;
             if (treeNode.getLeft() != null)
@@ -79,19 +75,12 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
             else
                 child = treeNode.getRight();
 
-            if (treeNode.getRight() != null & isLeftChild) {
+            if (isLeftChild)
                 parent.setLeft(child);
-                child.setParent(parent);
-            } else if (treeNode.getRight() != null & !isLeftChild) {
+            else
                 parent.setRight(child);
-                child.setParent(parent);
-            } else if (treeNode.getRight() == null & isLeftChild) {
-                parent.setLeft(child);
-                child.setParent(parent);
-            } else {
-                parent.setLeft(child);
-                child.setParent(parent);
-            }
+
+            child.setParent(parent);
 
         } else {
             TreeNode right = treeNode.getRight();
@@ -102,7 +91,6 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
                 parent.setLeft(rightTreeMin);
             else
                 parent.setRight(rightTreeMin);
-            System.out.println(parent.getData());
             rightTreeMin.setParent(parent);
             rightTreeMin.setLeft(treeNode.getLeft());
             if (rightTreeMin != treeNode.getRight())

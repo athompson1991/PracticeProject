@@ -4,15 +4,10 @@ package com.preparation.projecteuler;
  * Created by Alex on 1/28/2017.
  */
 public class Solution48 extends AbstractSolution {
-    private int n;
 
     public Solution48() {
         this.solutionNumber = 48;
         this.n = 1000;
-    }
-
-    public void setN(int in) {
-        n = in;
     }
 
     private String padZero(Long inLong) {

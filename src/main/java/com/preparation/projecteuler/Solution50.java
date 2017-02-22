@@ -10,7 +10,6 @@ public class Solution50 extends AbstractSolution {
     Utilities utilities = new Utilities();
     List<Integer> primeList;
     List<Integer> currentMaxList;
-    private int n;
 
     public Solution50() {
         this.solution = 0;
@@ -24,13 +23,6 @@ public class Solution50 extends AbstractSolution {
             if (utilities.isPrime(i))
                 primeList.add(i);
         }
-    }
-
-    private int sumFromList(List<Integer> in) {
-        int out = 0;
-        for (int i = 0; i < in.size(); i++)
-            out += in.get(i);
-        return out;
     }
 
     public void solve() {
@@ -66,8 +58,5 @@ public class Solution50 extends AbstractSolution {
         return utilities.isPrime(tempSum) & tempSum < n;
     }
 
-    public void setN(int n) {
-        this.n = n;
-    }
 }
 

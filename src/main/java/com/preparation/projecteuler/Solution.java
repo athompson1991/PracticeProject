@@ -1,16 +1,9 @@
 package com.preparation.projecteuler;
 
-import java.util.AbstractCollection;
-
 /**
- * Created by aleth on 1/24/2017.
+ * Created by Alex on 2/12/2017 at 8:42 PM.
  */
 public interface Solution {
-
-    void printSolution();
-
     void solve();
-
-    boolean isSolved();
-
+    void printSolution();
 }

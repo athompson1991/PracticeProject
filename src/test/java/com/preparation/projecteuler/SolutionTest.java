@@ -30,7 +30,6 @@ public class SolutionTest {
         for (Class solution : allSolutions) {
             try {
                 AbstractSolution temp = (AbstractSolution) solution.newInstance();
-                assertFalse(temp.isSolved());
                 temp.solve();
                 temp.printSolution();
             } catch (InstantiationException e) {

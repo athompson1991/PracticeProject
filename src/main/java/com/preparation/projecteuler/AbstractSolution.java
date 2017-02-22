@@ -3,8 +3,8 @@ package com.preparation.projecteuler;
 /**
  * Created by aleth on 1/24/2017.
  */
-public abstract class AbstractSolution implements SolutionInterface{
-    protected boolean solved = false;
+public abstract class AbstractSolution implements Solution {
+    protected Integer n;
     protected int solutionNumber;
     protected Object solution;
 
@@ -20,12 +20,12 @@ public abstract class AbstractSolution implements SolutionInterface{
         return solution;
     }
 
-    public void solve() {
-        solution = null;
+    protected void setN(Integer n) {
+        this.n = n;
     }
 
-    public boolean isSolved() {
-        return solved;
+    public void solve() {
+        solution = null;
     }
 
 }

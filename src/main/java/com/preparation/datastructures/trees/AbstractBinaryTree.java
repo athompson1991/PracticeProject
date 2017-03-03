@@ -1,6 +1,8 @@
 package com.preparation.datastructures.trees;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,113 +14,78 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public abstract class AbstractBinaryTree implements BinaryTree {
 
-    protected TreeNode root;
+    @Getter
+    @Setter
+    protected AbstractBinaryTree parent;
+    @Getter
+    @Setter
+    protected AbstractBinaryTree left;
+    @Getter
+    @Setter
+    protected AbstractBinaryTree right;
+    @Getter
+    @Setter
+    protected Integer data;
+
+    @Getter
+    @Setter
     protected Visitor visitor;
+    @Getter
+    @Setter
     protected Integer size;
+    @Getter
+    @Setter
+    protected Integer height;
+    @Getter
+    @Setter
+    protected Integer depth;
 
-    @Data
-    private class Visitor {
-        private List valuesList;
-
-        void visit(TreeNode node) {
-            System.out.print(node.getData() + "  ");
-        }
-
-        void addValue(TreeNode node) {
-            valuesList.add(node.getData());
-        }
-
-        void addValue(Integer value) {
-            valuesList.add(value);
-        }
-    }
 
     AbstractBinaryTree() {
-        this.root = null;
+        this.parent = null;
+        this.left = null;
+        this.right = null;
+        this.data = null;
+
         this.visitor = new Visitor();
         this.size = 0;
+        this.height = null;
+        this.depth = null;
     }
 
-    AbstractBinaryTree(TreeNode root) {
-        this.root = root;
-        this.visitor = new Visitor();
-        this.traverseLevelOrder();
-        this.size = this.getTraversalList().size();
-    }
-
-    public Boolean isComplete() {
-        return null;
-    }
-
-    public Boolean isFull() {
-        return null;
-    }
-
-    public Integer getHeight() {
-        return null;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public TreeNode getMin() {
-        return getMinOrMax(root, "min");
-    }
-
-    public TreeNode getMax() {
-        return getMinOrMax(root, "max");
-    }
-
-    private TreeNode getMinOrMax(TreeNode treeNode, String option) {
-        TreeNode out = null;
-        if (treeNode.isLeaf())
-            out = treeNode;
-        else {
-            if (option == "min")
-                getMinOrMax(treeNode.getLeft(), "min");
-            else if (option == "max")
-                getMinOrMax(treeNode.getRight(), "max");
-        }
-        return out;
-    }
-
-    public void print() {
-
-    }
-
-    public List getTraversalList() {
-        return visitor.getValuesList();
+    AbstractBinaryTree(Integer data) {
+        this();
+        this.data = data;
     }
 
     public void traverseInOrder() {
         visitor.setValuesList(new LinkedList());
-        traverseInOrder(root);
+        traverseInOrder(this);
     }
 
     public void traversePreOrder() {
         visitor.setValuesList(new LinkedList());
-        traversePreOrder(root);
+        traversePreOrder(this);
     }
 
     public void traversePostOrder() {
         visitor.setValuesList(new LinkedList());
-        traversePostOrder(root);
+        traversePostOrder(this);
     }
 
-    private void traverseInOrder(TreeNode treeNode) {
+    private void traverseInOrder(AbstractBinaryTree treeNode) {
         if (treeNode.getLeft() != null) traverseInOrder(treeNode.getLeft());
         visitor.addValue(treeNode);
         if (treeNode.getRight() != null) traverseInOrder(treeNode.getRight());
     }
 
-    public void traversePreOrder(TreeNode treeNode) {
+    public void traversePreOrder(AbstractBinaryTree treeNode) {
         visitor.addValue(treeNode);
         if (treeNode.getLeft() != null) traversePreOrder(treeNode.getLeft());
         if (treeNode.getRight() != null) traversePreOrder(treeNode.getRight());
     }
 
-    private void traversePostOrder(TreeNode treeNode) {
+    private void traversePostOrder(AbstractBinaryTree treeNode) {
         if (treeNode.getLeft() != null) traversePostOrder(treeNode.getLeft());
         if (treeNode.getRight() != null) traversePostOrder(treeNode.getRight());
         visitor.addValue(treeNode);
@@ -126,20 +93,36 @@ public abstract class AbstractBinaryTree implements BinaryTree {
 
     public void traverseLevelOrder() {
         visitor.setValuesList(new LinkedList());
-        Queue<TreeNode> queue = new LinkedBlockingQueue<>();
-        queue.add(root);
+        Queue<AbstractBinaryTree> queue = new LinkedBlockingQueue<>();
+        queue.add(this);
         while (!queue.isEmpty()) {
             Integer temp = dequeueValue(queue);
             visitor.addValue(temp);
         }
     }
 
-    private Integer dequeueValue(Queue<TreeNode> printQueue) {
-        TreeNode poppedElement = printQueue.remove();
+    private Integer dequeueValue(Queue<AbstractBinaryTree> printQueue) {
+        AbstractBinaryTree poppedElement = printQueue.remove();
         if (poppedElement.getLeft() != null) printQueue.add(poppedElement.getLeft());
         if (poppedElement.getRight() != null) printQueue.add(poppedElement.getRight());
         return poppedElement.getData();
     }
 
+    @Data
+    private class Visitor {
+        private List valuesList;
+
+        void visit(AbstractBinaryTree node) {
+            System.out.print(node.getData() + "  ");
+        }
+
+        void addValue(AbstractBinaryTree node) {
+            valuesList.add(node.getData());
+        }
+
+        void addValue(Integer value) {
+            valuesList.add(value);
+        }
+    }
 
 }

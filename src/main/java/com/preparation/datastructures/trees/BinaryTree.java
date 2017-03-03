@@ -9,18 +9,18 @@ public interface BinaryTree {
     void add(Integer value);
     void delete(Integer value);
     Boolean search(Integer value);
-    TreeNode get(Integer value);
-    Boolean isComplete();
-    Boolean isFull();
 
+    BinaryTree get(Integer value);
     Boolean isEmpty();
+
+    Boolean isComplete();
+
     Integer getHeight();
 
-    Integer getSize();
-    void print();
+    Integer getDepth();
+
     void traverseInOrder();
     void traversePreOrder();
     void traversePostOrder();
     void traverseLevelOrder();
-    List getTraversalList();
 }

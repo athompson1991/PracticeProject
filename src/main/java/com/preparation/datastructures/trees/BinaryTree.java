@@ -9,15 +9,23 @@ public interface BinaryTree {
     void add(Integer value);
     void delete(Integer value);
     Boolean search(Integer value);
-
     BinaryTree get(Integer value);
-    Boolean isEmpty();
 
+    Boolean isEmpty();
     Boolean isComplete();
 
     Integer getHeight();
-
     Integer getDepth();
+
+    Object getData();
+
+    BinaryTree getLeft();
+
+    BinaryTree getRight();
+
+    BinaryTree min();
+
+    BinaryTree max();
 
     void traverseInOrder();
     void traversePreOrder();

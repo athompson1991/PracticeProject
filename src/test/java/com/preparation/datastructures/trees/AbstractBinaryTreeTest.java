@@ -13,9 +13,11 @@ public abstract class AbstractBinaryTreeTest {
     protected AbstractBinaryTree tree;
 
     @Test
-    public void testHeight() {
+    public void height() {
         assertNull(tree.getHeight());
         tree.add(100);
+        tree.traverseInOrder();
+        System.out.print(tree.treeListInOrder());
         assertEquals(0, tree.getHeight().intValue());
         tree.add(200);
         assertEquals(1, tree.getHeight().intValue());
@@ -28,7 +30,17 @@ public abstract class AbstractBinaryTreeTest {
         assertEquals(0, tree.getDepth().intValue());
         tree.add(200);
         assertEquals(0, tree.getDepth().intValue());
-        System.out.println(tree.getRight().toString());
     }
 
+    protected void populate() {
+        tree.add(100);
+        tree.add(200);
+        tree.add(50);
+        tree.add(25);
+        tree.add(75);
+        tree.add(500);
+        tree.add(700);
+        tree.add(400);
+        tree.add(300);
+    }
 }

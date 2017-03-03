@@ -62,17 +62,17 @@ public abstract class AbstractBinaryTree implements BinaryTree {
     }
 
     public void traverseInOrder() {
-        visitor.setValuesList(new LinkedList());
+        visitor.setNodeListing(new LinkedList());
         traverseInOrder(this);
     }
 
     public void traversePreOrder() {
-        visitor.setValuesList(new LinkedList());
+        visitor.setNodeListing(new LinkedList());
         traversePreOrder(this);
     }
 
     public void traversePostOrder() {
-        visitor.setValuesList(new LinkedList());
+        visitor.setNodeListing(new LinkedList());
         traversePostOrder(this);
     }
 
@@ -95,37 +95,35 @@ public abstract class AbstractBinaryTree implements BinaryTree {
     }
 
     public void traverseLevelOrder() {
-        visitor.setValuesList(new LinkedList());
+        visitor.setNodeListing(new LinkedList());
         Queue<AbstractBinaryTree> queue = new LinkedBlockingQueue<>();
         queue.add(this);
         while (!queue.isEmpty()) {
-            Integer temp = dequeueValue(queue);
+            AbstractBinaryTree temp = dequeueValue(queue);
             visitor.addValue(temp);
         }
     }
 
-    private Integer dequeueValue(Queue<AbstractBinaryTree> printQueue) {
+    private AbstractBinaryTree dequeueValue(Queue<AbstractBinaryTree> printQueue) {
         AbstractBinaryTree poppedElement = printQueue.remove();
         if (poppedElement.getLeft() != null) printQueue.add(poppedElement.getLeft());
         if (poppedElement.getRight() != null) printQueue.add(poppedElement.getRight());
-        return poppedElement.getData();
+        return poppedElement;
+    }
+
+
+    public List treeListInOrder() {
+        return visitor.getNodeListing();
     }
 
     @Data
     private class Visitor {
-        private List valuesList;
-
-        void visit(AbstractBinaryTree node) {
-            System.out.print(node.getData() + "  ");
-        }
+        public List<AbstractBinaryTree> nodeListing;
 
         void addValue(AbstractBinaryTree node) {
-            valuesList.add(node.getData());
+            nodeListing.add(node);
         }
 
-        void addValue(Integer value) {
-            valuesList.add(value);
-        }
     }
 
     @Override

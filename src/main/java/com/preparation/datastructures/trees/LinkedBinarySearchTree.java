@@ -34,14 +34,21 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
         }
     }
 
+    private void reassignHeights(AbstractBinaryTree node) {
+        node.height += 1;
+        if (node.parent != null)
+            reassignHeights(node.parent);
+    }
+
     private void add(Integer value, AbstractBinaryTree tree) {
         tree.setSize(tree.getSize() + 1);
         if (value < tree.getData()) {
             if (tree.getLeft() == null) {
                 AbstractBinaryTree newNode = new LinkedBinarySearchTree(value);
                 newNode.setParent(tree);
-//                newNode.setDepth(tree.depth+1);
+                newNode.setDepth(tree.depth + 1);
                 tree.setLeft(newNode);
+                reassignHeights(tree);
             } else {
                 add(value, tree.getLeft());
             }
@@ -49,9 +56,12 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
             if (tree.getRight() == null) {
                 AbstractBinaryTree newNode = new LinkedBinarySearchTree(value);
                 newNode.setParent(tree);
-//                newNode.setDepth(tree.getDepth() + 1);
+                newNode.setDepth(tree.getDepth() + 1);
                 tree.setRight(newNode);
-            } else add(value, tree.getRight());
+                reassignHeights(tree);
+            } else {
+                add(value, tree.getRight());
+            }
         }
     }
 

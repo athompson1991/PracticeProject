@@ -28,7 +28,7 @@ public abstract class AbstractBinaryTreeTest {
         assertEquals(0, tree.getDepth().intValue());
         tree.add(200);
         assertEquals(0, tree.getDepth().intValue());
-        System.out.println(tree.getRight().getRight().toString());
+        System.out.println(tree.getRight().toString());
     }
 
 }

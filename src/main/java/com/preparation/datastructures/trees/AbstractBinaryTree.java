@@ -56,6 +56,9 @@ public abstract class AbstractBinaryTree implements BinaryTree {
     AbstractBinaryTree(Integer data) {
         this();
         this.data = data;
+        this.size = 1;
+        this.height = 0;
+        this.depth = 0;
     }
 
     public void traverseInOrder() {
@@ -123,6 +126,12 @@ public abstract class AbstractBinaryTree implements BinaryTree {
         void addValue(Integer value) {
             valuesList.add(value);
         }
+    }
+
+    @Override
+    public String toString() {
+        String out = String.format("Height: %d\nDepth: %d\nData: %d\nSize: %d", this.height, this.depth, this.data, this.size);
+        return out;
     }
 
 }

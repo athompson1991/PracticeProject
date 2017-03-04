@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 /**
  * Created by Alex on 2/15/2017 at 1:19 PM.
  */
-public class LinkedBinarySearchTree extends AbstractBinaryTree implements BinaryTree {
+public class LinkedBinarySearchTree extends AbstractBinaryTree {
 
     LinkedBinarySearchTree() {
         super();
@@ -67,13 +67,47 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
 
 
     public void delete(Integer value) {
-        BinaryTree deleteThis = get(value, this);
+        AbstractBinaryTree deleteThis = get(value, this);
+        AbstractBinaryTree parentNode = deleteThis.getParent();
+
         boolean twoKids = deleteThis.getLeft() != null & deleteThis.getRight() != null;
-        if (!twoKids) {
+        boolean leaf = deleteThis.getLeft() == null & deleteThis.getRight() == null;
+        boolean oneKid = !twoKids & !leaf;
 
+        boolean deletionIsLeft = deleteThis.getData() < deleteThis.getParent().getData();
+
+        AbstractBinaryTree replacement;
+        if (oneKid) {
+            boolean replacementToLeft = deleteThis.getLeft() != null;
+            if (replacementToLeft) {
+                replacement = deleteThis.getLeft();
+                replacement.setParent(parentNode);
+                replaceForParent(parentNode, replacement, deletionIsLeft);
+            } else {
+                replacement = deleteThis.getRight();
+                replacement.setParent(parentNode);
+                replaceForParent(parentNode, replacement, deletionIsLeft);
+            }
+        } else if (twoKids) {
+            AbstractBinaryTree rightKid = deleteThis.getRight();
+            AbstractBinaryTree rightMin = (AbstractBinaryTree) rightKid.min();
+            rightMin.getParent().setLeft(null);
+            rightMin.setParent(parentNode);
+            rightMin.setLeft(deleteThis.left);
+            rightMin.setRight(deleteThis.right);
+            deleteThis.getRight().setParent(rightMin);
+            deleteThis.getLeft().setParent(rightMin);
+            replaceForParent(parentNode, rightMin, deletionIsLeft);
         } else {
-
+            replaceForParent(parentNode, null, deletionIsLeft);
         }
+    }
+
+    private void replaceForParent(AbstractBinaryTree parentNode, AbstractBinaryTree replacement, boolean logic) {
+        if (logic)
+            parentNode.setLeft(replacement);
+        else
+            parentNode.setRight(replacement);
     }
 
     @Override
@@ -82,12 +116,12 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
     }
 
     @Override
-    public BinaryTree get(Integer value) {
+    public AbstractBinaryTree get(Integer value) {
         return get(value, this);
     }
 
-    private BinaryTree get(Integer value, AbstractBinaryTree tree) {
-        BinaryTree out;
+    private AbstractBinaryTree get(Integer value, AbstractBinaryTree tree) {
+        AbstractBinaryTree out;
         if (value.equals(tree.getData()))
             out = tree;
         else {
@@ -106,19 +140,23 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree implements Binary
         return out;
     }
 
-
     public AbstractBinaryTree max() {
-        return null;
+        return minOrMax(this, false);
     }
 
     public AbstractBinaryTree min() {
-        return min(this);
+        return minOrMax(this, true);
     }
 
-    private AbstractBinaryTree min(AbstractBinaryTree tree) {
+    private AbstractBinaryTree minOrMax(AbstractBinaryTree tree, boolean isLeft) {
         AbstractBinaryTree out = tree;
-        if (tree.getLeft() != null)
-            out = min(tree.getLeft());
+        if (isLeft) {
+            if (tree.getLeft() != null)
+                out = minOrMax(tree.getLeft(), true);
+        } else {
+            if (tree.getRight() != null)
+                out = minOrMax(tree.getRight(), false);
+        }
         return out;
     }
 

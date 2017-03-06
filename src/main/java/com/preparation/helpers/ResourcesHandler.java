@@ -18,7 +18,6 @@ public class ResourcesHandler {
                 String line = scanner.nextLine();
                 result.append(line).append("\n");
             }
-
             scanner.close();
         } catch (IOException e) {
             e.printStackTrace();

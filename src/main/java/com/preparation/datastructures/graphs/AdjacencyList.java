@@ -1,5 +1,7 @@
 package com.preparation.datastructures.graphs;
 
+import com.preparation.helpers.NameHandler;
+
 import java.util.*;
 
 /**
@@ -7,11 +9,26 @@ import java.util.*;
  */
 public class AdjacencyList {
 
-    private HashMap<UUID, HashMap<UUID, Integer>> adjacencyList = new HashMap<>();
+    private NameHandler nameHandler;
+    private HashMap<UUID, HashMap<UUID, Integer>> adjacencyList;
+    private HashMap<UUID, String> nameDictionary;
+
+    public AdjacencyList() {
+        this.adjacencyList = new HashMap<>();
+        this.nameDictionary = new HashMap<>();
+        this.nameHandler = new NameHandler();
+        this.nameHandler.readNames();
+    }
 
     public void addVertex(){
         UUID newId = UUID.randomUUID();
         adjacencyList.put(newId, new HashMap<>());
+        nameDictionary.put(newId, nameHandler.getRandomName());
+    }
+
+    public void addVertex(HashMap<UUID, Integer> connections) {
+        UUID newId = UUID.randomUUID();
+        adjacencyList.put(newId, connections);
     }
 
     public void connect(UUID from, UUID to, Integer weight){
@@ -19,6 +36,26 @@ public class AdjacencyList {
             adjacencyList.get(from).put(to, weight);
         else
             throw new NoSuchElementException();
+    }
+
+    public void randomizeGraph(int n, int averageConnections, boolean noLoops) {
+        this.adjacencyList = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            addVertex();
+        }
+        for (int i = 0; i < (n * averageConnections); i++) {
+            UUID randomVertex1 = getRandomVertex();
+            UUID randomVertex2 = randomVertex1;
+            if (noLoops) {
+                while (randomVertex2 == randomVertex1) {
+                    randomVertex2 = getRandomVertex();
+                }
+            } else {
+                randomVertex2 = getRandomVertex();
+            }
+            int weight = (int) (Math.random() * 100);
+            connect(randomVertex1, randomVertex2, weight);
+        }
     }
 
     public UUID getRandomVertex() {
@@ -32,6 +69,7 @@ public class AdjacencyList {
         return out;
     }
 
+
     public HashMap getList(){
         return adjacencyList;
     }
@@ -40,9 +78,18 @@ public class AdjacencyList {
     public String toString() {
         String out = "";
         for(UUID id : adjacencyList.keySet()) {
-            String vertex = id.toString();
-            String list = adjacencyList.get(id).toString();
-            out = out + vertex + " : " + list + "\n";
+            String vertex = nameDictionary.get(id).toString();
+            HashMap<UUID, Integer> list = adjacencyList.get(id);
+            String constructed = "[ ";
+            for (UUID tempId : list.keySet()) {
+                String tempName = nameDictionary.get(tempId);
+                String tempWeight = list.get(tempId).toString();
+                constructed = constructed + tempName + "=" + tempWeight + ", ";
+            }
+            if (constructed.length() > 2)
+                constructed = constructed.substring(0, constructed.length() - 2);
+            constructed = constructed + " ]";
+            out = out + vertex + " : " + constructed + "\n";
         }
         return out;
     }

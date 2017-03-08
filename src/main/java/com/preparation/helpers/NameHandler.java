@@ -12,6 +12,19 @@ public class NameHandler {
     private HashSet<String> firstNames;
     private HashSet<String> lastNames;
     private ResourcesHandler reader = new ResourcesHandler();
+    private Random random;
+
+    public NameHandler(Random random) {
+        this.random = random;
+    }
+
+    public NameHandler() {
+        this.random = new Random();
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
 
     public void readNames() {
         String[] firstNamesRaw = reader.getFile("first-names.txt").split("\n");
@@ -24,8 +37,8 @@ public class NameHandler {
         String out = "";
         int firstNamesN = firstNames.size();
         int lastNamesN = lastNames.size();
-        int randomFirstIndex = new Random().nextInt(firstNamesN);
-        int randomLastIndex = new Random().nextInt(lastNamesN);
+        int randomFirstIndex = random.nextInt(firstNamesN);
+        int randomLastIndex = random.nextInt(lastNamesN);
 
 
         int i = 0;

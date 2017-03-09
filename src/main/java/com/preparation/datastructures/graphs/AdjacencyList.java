@@ -13,6 +13,7 @@ public class AdjacencyList {
     private HashMap<UUID, HashMap<UUID, Integer>> adjacencyList;
     private HashMap<UUID, String> nameDictionary;
     private Random random;
+    private Object[] ids;
 
     public HashMap<UUID, String> getNameDictionary() {
         return nameDictionary;
@@ -60,6 +61,7 @@ public class AdjacencyList {
         for (int i = 0; i < n; i++) {
             addVertex();
         }
+        ids = adjacencyList.keySet().toArray();
         for (int i = 0; i < (n * averageConnections); i++) {
             UUID randomVertex1 = getRandomVertex();
             UUID randomVertex2 = randomVertex1;
@@ -70,18 +72,15 @@ public class AdjacencyList {
             }
             int weight = random.nextInt(100);
             connect(randomVertex1, randomVertex2, weight);
-            populateNames();
         }
+        populateNames();
     }
 
     public UUID getRandomVertex() {
         UUID out = null;
         int n = adjacencyList.size();
-        int randomIndex = random.nextInt(n) + 1;
-        Iterator<UUID> getter = adjacencyList.keySet().iterator();
-        for (int i = 0; i < randomIndex; i++) {
-            out = getter.next();
-        }
+        int randomIndex = random.nextInt(n);
+        out = (UUID) ids[randomIndex];
         return out;
     }
 
@@ -110,5 +109,8 @@ public class AdjacencyList {
         return out;
     }
 
+    public Object[] getIds() {
+        return ids;
+    }
 
 }

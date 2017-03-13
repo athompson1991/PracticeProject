@@ -1,56 +1,90 @@
 package com.preparation.randompractice;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Created by aleth on 3/10/2017.
  */
 public class NumberToWords {
-    private static HashMap<String, String> randomMap;
-    private static HashMap<String, String> normalMap;
+
+    private HashMap<String, String> randomMap;
+    private HashMap<String, String> normalMap;
+    private HashMap<String, String> prefixList;
 
     public NumberToWords() {
         randomMap = new HashMap<>();
         normalMap = new HashMap<>();
+        prefixList = new HashMap<>();
+        randomMap.put("10", "ten");
         randomMap.put("11", "eleven");
         randomMap.put("12", "twelve");
-        randomMap.put("13", "thirteen");
-        String[] tempArray = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-        for (int i = 1; i < 10; i++)
+        randomMap.put("14", "fourteen");
+        prefixList.put("2", "twen");
+        prefixList.put("3", "thir");
+        prefixList.put("4", "for");
+        prefixList.put("5", "fif");
+        prefixList.put("6", "six");
+        prefixList.put("7", "seven");
+        prefixList.put("8", "eigh");
+        prefixList.put("9", "nine");
+        prefixList.put("0", "");
+        String[] tempArray = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+        for (int i = 0; i < 10; i++)
             normalMap.put(String.valueOf(i), tempArray[i]);
     }
 
-    public static String fromText(String in) {
+    public String fromText(String in) {
         String out = null;
-        if (randomMap.keySet().contains(in))
-            out = in;
+        if (Integer.valueOf(in) < 1000)
+            out = parseString(in);
         else {
-            if (Integer.valueOf(in) < 1000) {
-                out = parseString(in);
-            } else {
-                out = parseString(in.substring(0, 2)) + "thousand" + parseString(in.substring(3, in.length()));
-            }
+            int length = in.length();
+            String firstThree = in.substring(0, length - 3);
+            String lastThree = in.substring(length - 3, length);
+            out = parseString(firstThree) + " thousand " + parseString(lastThree);
         }
         return out;
     }
 
-    private static String parseString(String in) {
+    private String parseString(String in) {
         String out = null;
         int length = in.length();
         if (randomMap.keySet().contains(in))
             out = randomMap.get(in);
-        else if (length == 1) {
+        else if (length == 1)
             out = normalMap.get(in);
-        } else if (length == 2) {
-            out = normalMap.get(in.charAt(0)) + "ty" + normalMap.get(in.charAt(1));
-        } else if (length == 3) {
-            out = normalMap.get(in.charAt(0)) + "hundred" + normalMap.get(in.charAt(1)) + "ty" + normalMap.get(in.charAt(2));
+        else if (length == 2) out = parseTens(in);
+        else if (length == 3) {
+            String hundredsChar = String.valueOf(in.charAt(0));
+            String hundreds;
+            if (hundredsChar.equals("0")) {
+                hundreds = "";
+            } else {
+                hundreds = normalMap.get(hundredsChar) + " hundred ";
+            }
+            String tensRaw = in.substring(1, 3);
+            out = hundreds + parseTens(tensRaw);
         }
         return out;
     }
 
-    public static void main(String args[]) {
-        String testString = "100";
-        System.out.println(fromText(testString));
+    private String parseTens(String in) {
+        String out;
+        String tensChar = String.valueOf(in.charAt(0));
+        String onesChar = String.valueOf(in.charAt(1));
+        if (randomMap.keySet().contains(in))
+            out = randomMap.get(in);
+        else if (Objects.equals(tensChar, "1"))
+            out = prefixList.get(onesChar) + "teen ";
+        else if (Objects.equals(tensChar, "0"))
+            out = normalMap.get(onesChar);
+        else {
+            String ones = normalMap.get(onesChar);
+            if (onesChar.equals("0")) out = prefixList.get(tensChar) + "ty";
+            else out = prefixList.get(tensChar) + "ty-" + ones;
+        }
+        return out;
     }
+
 }

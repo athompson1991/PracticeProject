@@ -8,6 +8,7 @@ import java.util.*;
  * Created by aleth on 3/8/2017.
  */
 public class TraversalHandler {
+
     private AdjacencyList adjacencyList;
     private HashMap<UUID, HashMap<UUID, Integer>> rawList;
     private LinkedList<UUID> traversalList;
@@ -34,13 +35,7 @@ public class TraversalHandler {
         if (visited.containsAll(connections)) {
             out = traversed;
         } else {
-            Iterator<UUID> connectionsIterator = connections.iterator();
-            while (connectionsIterator.hasNext()) {
-                UUID check = connectionsIterator.next();
-                traversed.add(check);
-                visited.add(check);
-                out = breadthFirstTraversal(check, visited, traversed);
-            }
+
         }
         return out;
     }

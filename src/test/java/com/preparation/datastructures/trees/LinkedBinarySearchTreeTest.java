@@ -1,6 +1,7 @@
 package com.preparation.datastructures.trees;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -12,7 +13,9 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by aleth on 3/2/2017.
  */
-public class LinkedBinarySearchTreeTest extends AbstractBinaryTreeTest {
+public class LinkedBinarySearchTreeTest {
+
+    private LinkedBinarySearchTree tree;
 
     @Before
     public void setup() {
@@ -48,11 +51,23 @@ public class LinkedBinarySearchTreeTest extends AbstractBinaryTreeTest {
     @Test
     public void minMax() {
         populate();
-        assertEquals(25, tree.min().getData());
-        assertEquals(700, tree.max().getData());
+        assertEquals(25, tree.min().getData().intValue());
+        assertEquals(700, tree.max().getData().intValue());
 
         LinkedBinarySearchTree temp = new LinkedBinarySearchTree(100);
         assertEquals(100, temp.min().getData().intValue());
         assertEquals(100, temp.max().getData().intValue());
+    }
+
+    protected void populate() {
+        tree.add(100);
+        tree.add(200);
+        tree.add(50);
+        tree.add(25);
+        tree.add(75);
+        tree.add(500);
+        tree.add(700);
+        tree.add(400);
+        tree.add(300);
     }
 }

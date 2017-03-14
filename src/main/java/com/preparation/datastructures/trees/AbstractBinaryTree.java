@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by aleth on 2/17/2017.
  */
-public abstract class AbstractBinaryTree implements BinaryTree {
+public abstract class AbstractBinaryTree<Object> implements BinaryTree<Object> {
 
     @Getter
     @Setter
@@ -115,6 +115,7 @@ public abstract class AbstractBinaryTree implements BinaryTree {
     public List treeListInOrder() {
         return visitor.getNodeListing();
     }
+
 
     @Data
     private class Visitor {

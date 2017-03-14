@@ -1,12 +1,14 @@
 package com.preparation.datastructures.trees;
 
 
+import sun.awt.image.ImageWatched;
+
 import java.util.NoSuchElementException;
 
 /**
  * Created by Alex on 2/15/2017 at 1:19 PM.
  */
-public class LinkedBinarySearchTree extends AbstractBinaryTree {
+public class LinkedBinarySearchTree extends AbstractBinaryTree<Integer> {
 
     LinkedBinarySearchTree() {
         super();
@@ -89,8 +91,8 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree {
                 replaceForParent(parentNode, replacement, deletionIsLeft);
             }
         } else if (twoKids) {
-            AbstractBinaryTree rightKid = deleteThis.getRight();
-            AbstractBinaryTree rightMin = (AbstractBinaryTree) rightKid.min();
+            LinkedBinarySearchTree rightKid = (LinkedBinarySearchTree) deleteThis.getRight();
+            LinkedBinarySearchTree rightMin = (LinkedBinarySearchTree) rightKid.min();
             rightMin.getParent().setLeft(null);
             rightMin.setParent(parentNode);
             rightMin.setLeft(deleteThis.left);
@@ -140,22 +142,22 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree {
         return out;
     }
 
-    public AbstractBinaryTree max() {
+    public LinkedBinarySearchTree max() {
         return minOrMax(this, false);
     }
 
-    public AbstractBinaryTree min() {
+    public LinkedBinarySearchTree min() {
         return minOrMax(this, true);
     }
 
-    private AbstractBinaryTree minOrMax(AbstractBinaryTree tree, boolean isLeft) {
-        AbstractBinaryTree out = tree;
+    private LinkedBinarySearchTree minOrMax(LinkedBinarySearchTree tree, boolean isLeft) {
+        LinkedBinarySearchTree out = tree;
         if (isLeft) {
             if (tree.getLeft() != null)
-                out = minOrMax(tree.getLeft(), true);
+                out = minOrMax((LinkedBinarySearchTree) tree.getLeft(), true);
         } else {
             if (tree.getRight() != null)
-                out = minOrMax(tree.getRight(), false);
+                out = minOrMax((LinkedBinarySearchTree) tree.getRight(), false);
         }
         return out;
     }
@@ -165,8 +167,4 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree {
         return size == 0;
     }
 
-    @Override
-    public Boolean isComplete() {
-        return null;
-    }
 }

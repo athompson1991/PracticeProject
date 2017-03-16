@@ -162,9 +162,4 @@ public class LinkedBinarySearchTree extends AbstractBinaryTree<Integer> {
         return out;
     }
 
-    @Override
-    public Boolean isEmpty() {
-        return size == 0;
-    }
-
 }

@@ -133,4 +133,8 @@ public abstract class AbstractBinaryTree<Object> implements BinaryTree<Object> {
         return out;
     }
 
+    public Boolean isEmpty() {
+        return size == 0;
+    }
+
 }

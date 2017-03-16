@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 /**
  * Created by aleth on 3/2/2017.

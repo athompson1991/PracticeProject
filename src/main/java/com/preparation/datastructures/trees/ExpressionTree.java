@@ -33,25 +33,52 @@ public class ExpressionTree extends AbstractBinaryTree<Character> {
         this.expression = expression;
     }
 
-    private void expressionToPostfix() {
+    public String getExpression() {
+        return expression;
+    }
+
+    protected void expressionToPostfix() {
         StringBuilder newExpression = new StringBuilder();
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < expression.length(); i++) {
-            Character currentChar = expression.charAt(i);
-            boolean isOperator = isOperator(currentChar);
+            Character currentCharacter = expression.charAt(i);
+            boolean stackIsEmpty = stack.isEmpty();
+            boolean isOperator = isOperator(currentCharacter);
+            boolean isOperand = !isOperator;
 
-            if (!isOperator & stack.isEmpty())
-                newExpression.append(currentChar);
-            else if (isOperator & stack.isEmpty())
-                stack.push(currentChar);
-            else if (isOperator & !stack.isEmpty()) {
-                Character topStack = stack.peek();
-                if (operatorsWithPrecedence.get(topStack) > operatorsWithPrecedence.get(currentChar))
+            boolean topIsLeftParen = false;
+            if (!stackIsEmpty)
+                topIsLeftParen = stack.peek().equals('(');
+            Integer topPrecedence = null;
+            if (!stackIsEmpty & !topIsLeftParen)
+                topPrecedence = operatorsWithPrecedence.get(stack.peek());
+            Integer precedence = operatorsWithPrecedence.get(currentCharacter);
+
+
+            if (isOperand) {
+                newExpression.append(currentCharacter);
+            } else if (stackIsEmpty | topIsLeftParen) {
+                stack.push(currentCharacter);
+            } else if (currentCharacter.equals('(')) {
+                stack.push(currentCharacter);
+            } else if (currentCharacter.equals(')')) {
+                while (!stack.peek().equals('(')) {
                     newExpression.append(stack.pop());
-                else
-                    stack.push(currentChar);
-            }
+                }
+                stack.pop();
+            } else if (precedence > topPrecedence) {
+                stack.push(currentCharacter);
+            } else if (precedence == topPrecedence) {
+                newExpression.append(stack.pop());
+                stack.push(currentCharacter);
+            } else if (precedence < topPrecedence)
+                while (topPrecedence >= precedence)
+                    newExpression.append(stack.pop());
         }
+        while (!stack.isEmpty())
+            newExpression.append(stack.pop());
+
+        expression = newExpression.toString();
     }
 
     public Integer evaluate() {

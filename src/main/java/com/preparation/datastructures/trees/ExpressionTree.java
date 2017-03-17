@@ -44,7 +44,7 @@ public class ExpressionTree extends AbstractBinaryTree<Character> {
             Character currentCharacter = expression.charAt(i);
             boolean stackIsEmpty = stack.isEmpty();
             boolean isOperator = isOperator(currentCharacter);
-            boolean isOperand = !isOperator;
+            boolean isOperand = !isOperator & currentCharacter != '(' & currentCharacter != ')';
 
             boolean topIsLeftParen = false;
             if (!stackIsEmpty)
@@ -59,10 +59,11 @@ public class ExpressionTree extends AbstractBinaryTree<Character> {
                 newExpression.append(currentCharacter);
             } else if (stackIsEmpty | topIsLeftParen) {
                 stack.push(currentCharacter);
-            } else if (currentCharacter.equals('(')) {
+            } else if (currentCharacter.charValue() == ('(')) {
+                System.out.println(currentCharacter);
                 stack.push(currentCharacter);
-            } else if (currentCharacter.equals(')')) {
-                while (!stack.peek().equals('(')) {
+            } else if (currentCharacter == (')')) {
+                while (!(stack.peek() == ('('))) {
                     newExpression.append(stack.pop());
                 }
                 stack.pop();

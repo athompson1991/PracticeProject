@@ -23,9 +23,11 @@ public class ExpressionTreeTest {
         expressionTree.setExpression("2+2-2");
         expressionTree.expressionToPostfix();
         assertEquals("22+2-", expressionTree.getExpression());
+
         expressionTree.setExpression("2+2*2");
         expressionTree.expressionToPostfix();
         assertEquals("222*+", expressionTree.getExpression());
+
         expressionTree.setExpression("(2+2)*2");
         expressionTree.expressionToPostfix();
         assertEquals("22+2*", expressionTree.getExpression());

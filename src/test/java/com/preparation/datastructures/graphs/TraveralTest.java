@@ -17,6 +17,7 @@ public class TraveralTest {
     @Before
     public void setup() {
         adjacencyList = new AdjacencyList();
+        adjacencyList.setSeed(13);
         adjacencyList.randomizeGraph(10, 3, true);
         traversalHandler = new TraversalHandler(adjacencyList);
         startPoint = (UUID) adjacencyList.getIds()[0];

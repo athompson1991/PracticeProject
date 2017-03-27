@@ -10,6 +10,8 @@ import java.util.Stack;
 public class ExpressionTree extends AbstractBinaryTree<Character> {
 
     private String expression;
+    private ExpressionTree left;
+    private ExpressionTree right;
 
     private static final HashMap<Character, Integer> operatorsWithPrecedence = new HashMap<Character, Integer>();
 
@@ -54,7 +56,6 @@ public class ExpressionTree extends AbstractBinaryTree<Character> {
                 topPrecedence = operatorsWithPrecedence.get(stack.peek());
             Integer precedence = operatorsWithPrecedence.get(currentCharacter);
 
-
             if (isOperand) {
                 newExpression.append(currentCharacter);
             } else if (stackIsEmpty | topIsLeftParen) {
@@ -86,7 +87,6 @@ public class ExpressionTree extends AbstractBinaryTree<Character> {
         Integer out = null;
         return out;
     }
-
 
     @Override
     public void add(Character value) {
